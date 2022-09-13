@@ -63,9 +63,9 @@ const holdersHttp = {
 
         let { _id, email, state, password, createdAt, ...resto } = req.body;
 
-        resto=tools.actualizarResto(resto.document,resto)
-        resto=tools.actualizarResto(resto.name, resto)
-        resto=tools.actualizarResto(resto.phone,resto)
+        resto=tools.actualizarResto("document",resto.document,resto)
+        resto=tools.actualizarResto("name",resto.name, resto)
+        resto=tools.actualizarResto("phone",resto.phone,resto)
 
         const holder = await Holder.findByIdAndUpdate(id, resto);
 
