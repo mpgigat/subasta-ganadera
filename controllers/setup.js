@@ -10,8 +10,7 @@ const setupHttp = {
         })
     },
             
-    setupPost: async (req, res) => {
-        const { consecutivesale } = req.body;      
+    setupPost: async (req, res) => {    
         const cuantos = await Setup.find( );        
         if (cuantos.length==0) {
             const setup = new Setup();

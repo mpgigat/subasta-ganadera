@@ -1,7 +1,6 @@
-
+import mongoose from "mongoose";
 const tools={
     actualizarResto:(field,valueField,resto)=>{
-        console.log(valueField,"prueba");
         
         if (valueField!=undefined) if (valueField=="") {
             delete resto[field];   
@@ -10,7 +9,11 @@ const tools={
         
         return resto
     },
-    actualizarRestoNumeros:(field,valueField,resto)=>{       
+    actualizarRestoNumeros:(field,valueField,resto)=>{   
+        if (valueField=="") {
+            delete resto[field];     
+            return resto
+        }    
         if (valueField) if (isNaN(valueField)) {
            
             delete resto[field];           
@@ -18,6 +21,13 @@ const tools={
             return resto
         }
         return resto
+    },
+    validarMongoId:(id) => {        
+        const validar= mongoose.Types.ObjectId.isValid(id);
+        if(!validar) {
+          return false
+        }
+        return true
     },
     rellenarCeros:(value)=>{
         if(value.toString().length==1){

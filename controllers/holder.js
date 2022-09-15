@@ -46,8 +46,6 @@ const holdersHttp = {
         
         const holder = new Holder({ name, email, password, document, phone});
 
-        
-
         const salt = bcryptjs.genSaltSync();
         holder.password = bcryptjs.hashSync(password, salt)
 

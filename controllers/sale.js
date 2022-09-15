@@ -43,11 +43,11 @@ const saleHttp = {
         } else{
             consecutivesale=setup.consecutivesale+1
         } 
-
+        await Sale.findOneAndUpdate({state:1},{state:2});
         const salenumber=tools.rellenarCeros(consecutivesale)
         const sale = new Sale({ salenumber,type});
         await sale.save()
-        const setupUpdate = await Setup.findOneAndUpdate({},{consecutivesale});
+        await Setup.findOneAndUpdate({},{consecutivesale});        
         res.json({
             sale
         })

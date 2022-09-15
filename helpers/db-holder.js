@@ -12,6 +12,15 @@ const helpersHolder = {
         req.req.holderUpdate = existe
 
     },
+    
+    existeHolderByIdFn: async (id) => {
+        const existe = await Holder.findById(id)
+
+        if (!existe) {
+            return false
+        }
+        return true
+    },
 
     existeHolderByDocument: async (document, req) => {      
         

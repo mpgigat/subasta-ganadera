@@ -13,6 +13,7 @@ router.get('/',[
 ], setupHttp.setupGet );
 
 router.post('/',[    
+    validarJWT,
     validarCampos       
 ],  setupHttp.setupPost  );
 
