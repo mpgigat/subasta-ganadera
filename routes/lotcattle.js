@@ -10,17 +10,17 @@ import helpersBreed from '../helpers/db-breed.js';
 
 const router=Router();
 
-router.get('/subasta/:id',[
+router.get('/subasta/:sale',[
     validarJWT,
-    check('id').isMongoId(),
-    check("id").custom(helpersSale.existeSaleById),
+    check('sale').isMongoId(),
+    check("sale").custom(helpersSale.existeSaleById),
     validarCampos   
 ],cattleLotHttp.cattleLotGetSubasta);
 
-router.get('/puja/:id',[
+router.get('/puja/:sale',[
     validarJWT,
-    check('id').isMongoId(),
-    check("id").custom(helpersSale.existeSaleById),
+    check('sale').isMongoId(),
+    check("sale").custom(helpersSale.existeSaleById),
     validarCampos   
 ],cattleLotHttp.cattleLotGetPuja);
 
@@ -71,5 +71,6 @@ router.put('/unactivate/:id',[
     check('id').custom(helpersCattlelot.existeCattlelotById),
     validarCampos
 ],cattleLotHttp.cattleLotPutDeactivate);
+
 
 export default router

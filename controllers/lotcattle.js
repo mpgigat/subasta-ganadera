@@ -5,20 +5,21 @@ import Lotcattle from "../models/lotcattle.js"
 import Sale from "../models/sale.js"
 
 const cattleLotHttp = {
-
     cattleLotGetSubasta: async (req, res) => {
-        const cattleLot = await Lotcattle.find()
+        const {sale}=req.params
+        const cattleLot = await Lotcattle.find({sale})
             .populate("sale")
             .populate("provider")
             .populate("breed")
-
+            .populate("awarded")
         res.json({
             cattleLot
         })
     },
 
     cattleLotGetPuja: async (req, res) => {
-        const cattleLot = await Lotcattle.find()
+        const {sale}=req.params
+        const cattleLot = await Lotcattle.find({sale})
             .populate("sale")
             .populate("breed")
 
@@ -35,7 +36,7 @@ const cattleLotHttp = {
             .populate("sale")
             .populate("provider")
             .populate("breed")
-
+            .populate("awarded")
         res.json({
             cattleLot
         })
@@ -133,6 +134,9 @@ const cattleLotHttp = {
         })
     },
 
+   
+
+    
 
 }
 

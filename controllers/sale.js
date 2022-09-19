@@ -85,6 +85,15 @@ const saleHttp = {
         })
     },
 
+    saleCerrarSubasta: async (req, res) => {
+        const { id } = req.params;
+
+        const sale = await Sale.findByIdAndUpdate(id, { state: 2 });
+
+        res.json({
+            sale
+        })
+    },
 
 }
 

@@ -14,6 +14,8 @@ const cattleLotSchema=new mongoose.Schema({
     breed:{type:mongoose.Schema.Types.ObjectId,ref:'Breed',required:true},
     ica:{type:String,required:true},
     state:{type:String,default:1},
+    awarded:{type:mongoose.Schema.Types.ObjectId,ref:'Holder'},
+    price:{type:Number,default:0},
     createdAt:{type:Date,default:Date.now   }
 })
 

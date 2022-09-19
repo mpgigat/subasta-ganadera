@@ -27,6 +27,22 @@ const helpersCattlelot = {
         }
 
     },
+
+    existeCattlelotVerificarStateLoteSubasta: async (id,req) => {
+        const existe = await Cattlelot.findById(id)
+
+        if (!existe) {
+            throw new Error(`El id no existe ${id}`)
+        } else {
+            if (existe.state != 1) {
+                throw new Error(`Lote ya subastado ${id}`)
+            }
+
+        }
+
+        req.req.CattlelotUpdate = existe
+
+    },
 }
 export default helpersCattlelot
 

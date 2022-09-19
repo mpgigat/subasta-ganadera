@@ -48,4 +48,11 @@ router.put('/unactivate/:id',[
     validarCampos
 ],salesHttp.salePutDeactivate);
 
+router.put('/cerrarsubasta/:id',[
+    validarJWT,
+    check('id').isMongoId(),
+    check('id').custom(helpersSale.existeSaleById),
+    validarCampos
+],salesHttp.saleCerrarSubasta);
+
 export default router
