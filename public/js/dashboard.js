@@ -8,10 +8,13 @@ const lbladjudicada=document.querySelector('#lbladjudicada')
 
 const socket = io();
 
-socket.on('connect', () => {
-    console.log("Escuchando");
-    
-});
+// socket.on('connect', () => {
+
+//     socket.emit( 'pidiendo-info-inicial', subasta, ( msg ) => {
+//         console.log( msg );
+//     });
+// });
+
 
 socket.on('disconnect', () => {
     console.log("Desconectado");
@@ -26,7 +29,7 @@ socket.on('actualizar-puja', ( subasta ) => {
     lblprecioactual.style.display = '';
     lblprecioactual.innerText = `Precio Actual ${subasta.precioActual}`;
     lblholderactual.style.display = '';
-    lblholderactual.innerText = `Holder Actual ${subasta.holderActual}`;    
+    lblholderactual.innerText = `Holder Actual ${subasta.holderActual} - ${subasta.name}`;    
 })
 
 socket.on('actualizar-subasta', ( subasta ) => {

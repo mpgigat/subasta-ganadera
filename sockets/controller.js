@@ -1,14 +1,18 @@
+
 import helpersSaleLotCattle from "../helpers/db-saleLotCattle.js";
 const subasta={
     idSaleLotCattle:"",
     precioInicial:0,
-    holderActual:"",
+    holderActual:"5",
     precioActual:0
 }
-
 const socketController = (socket) => {
     // Cuando un cliente se conecta
-    socket.emit( 'actualizar', subasta );    
+ console.log("se conecto ", socket.id);
+ 
+    // socket.emit( 'actualizar', subasta, ( msg ) => {
+    //     console.log( msg );
+    // });
 
     socket.on('asigne-precio-inicial', async ( subasta, callback ) => {
         await helpersSaleLotCattle.saleLotCattlePrecioInicial(subasta)
@@ -36,7 +40,13 @@ const socketController = (socket) => {
     
         callback( "Ok" );
         socket.broadcast.emit( 'actualizar-subasta', "Desierta");
-    });
+    });  
+
+    // socket.on('pidiendo-info-inicial', async ( subasta, callback ) => {
+            
+    //     callback( "Ok" );
+    //     socket.broadcast.emit( 'actualizar-subasta', "Desierta");
+    // }); 
 
 }
 
@@ -45,4 +55,5 @@ const socketController = (socket) => {
 export {
     socketController
 }
+
 

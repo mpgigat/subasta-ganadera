@@ -8,7 +8,7 @@ const cattleLotSchema=new mongoose.Schema({
     quantity:{type:Number,default:0},
     classcattle:{type:String,required:true},
     weight:{type:Number,default:0},
-    weightavg:{type:Number,default:0},
+    weightavg:{type:Number,default:0},//calculado
     calfmale:{type:Number,default:0},
     calffemale:{type:Number,default:0},
     breed:{type:mongoose.Schema.Types.ObjectId,ref:'Breed',required:true},

@@ -62,7 +62,7 @@ btnAdjudicar.addEventListener( 'click', () => {
     });
 });
 
-btnAdjudicar.addEventListener( 'click', () => {
+btnDesierta.addEventListener( 'click', () => {
     const idSaleLotCattle = txtidsalelotcattle.value;
 
     const subasta = {

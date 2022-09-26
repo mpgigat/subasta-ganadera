@@ -1,5 +1,6 @@
 import SaleLotCattle from "../models/salelotcattle.js"
 import LotCattle from "../models/lotcattle.js"
+import Holder from "../models/holder.js"
 
 const helpersSaleLotCattle = {
     existeSaleLotCattleById: async (id, req) => {
@@ -23,6 +24,9 @@ const helpersSaleLotCattle = {
     saleLotCattlePujar: async (subasta) => {
         const saleLotCattle = await SaleLotCattle
             .findByIdAndUpdate(subasta.idSaleLotCattle, { currentprice: subasta.precioActual, currentholder: subasta.holderActual, $push: { bids: { holder: subasta.holderActual, price: subasta.precioActual } } },);
+
+        return await Holder.findById(subasta.holderActual)
+            
     },
 
     saleLotCattlePrecioInicial: async (subasta) => {
