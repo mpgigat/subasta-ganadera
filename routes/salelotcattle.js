@@ -28,7 +28,9 @@ router.get('/:id',[
 router.post('/',[    
     validarJWT,
     check('lotcattle').isMongoId(),
+    check('lotcattle').custom(helpersLotCattle.existeCattlelotVerificarState),
     check("lotcattle").custom(helpersLotCattle.existeCattlelotVerificarStateLoteSubasta),    
+    check("lotcattle").custom(helpersSaleLotCattle.existeOtroLoteEnSubasta),
     validarCampos       
 ],    saleLotCattleHttp.saleLotCattlePost);
 

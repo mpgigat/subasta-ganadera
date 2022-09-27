@@ -21,9 +21,24 @@ const helpersSaleLotCattle = {
             throw new Error(`Subasta cerrada!!!`)
     },
 
+    existeOtroLoteEnSubasta: async (idLotCattle,req) => {
+        //const lotCattle=await LotCattle.findById(idLotCattle)
+        const sale= req.req.CattlelotUpdate.sale;
+        const existe = await SaleLotCattle.findOne({
+            $and: [
+                { sale },
+                { state: 3 },
+            ]
+        })
+
+        if (existe) {
+            throw new Error(`Otro lote se esta subastando actualmente`)
+        } 
+    },
+
     saleLotCattlePujar: async (subasta) => {
-        const saleLotCattle = await SaleLotCattle
-            .findByIdAndUpdate(subasta.idSaleLotCattle, { currentprice: subasta.precioActual, currentholder: subasta.holderActual, $push: { bids: { holder: subasta.holderActual, price: subasta.precioActual } } },);
+        await SaleLotCattle
+            .findByIdAndUpdate(subasta.idSaleLotCattle, { currentpricekg: subasta.precioActual, currentholder: subasta.holderActual,currentconsecutiveholder:subasta.paleta,currentprice:subasta.total, $push: { bids: { holder: subasta.holderActual, pricekg: subasta.precioActual,consecutiveholder:subasta.paleta } } },);
 
         return await Holder.findById(subasta.holderActual)
             
@@ -40,7 +55,9 @@ const helpersSaleLotCattle = {
         const lotCattle = await LotCattle
             .findByIdAndUpdate(saleLotCattle.lotcattle, {
                 awarded: saleLotCattle.currentholder,
-                state: 2, price: saleLotCattle.currentprice
+                state: 2, 
+                price: saleLotCattle.currentprice,
+                pricekg:saleLotCattle.currentpricekg
             });
     },
 
@@ -49,6 +66,17 @@ const helpersSaleLotCattle = {
             .findByIdAndUpdate(subasta.idSaleLotCattle, { state: 2 });
         const lotCattle = await LotCattle
             .findByIdAndUpdate(saleLotCattle.lotcattle, {state: 2 });
+    },
+
+    buscarLoteSubastaActual: async () => {
+        return await SaleLotCattle.findOne({state:3})   
+            .populate({
+                path: "lotcattle",
+                populate: {
+                  path: "breed"
+                }
+              })
+            
     },
 
 }

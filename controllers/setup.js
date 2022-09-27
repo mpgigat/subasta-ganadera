@@ -10,10 +10,11 @@ const setupHttp = {
         })
     },
             
-    setupPost: async (req, res) => {    
+    setupPost: async (req, res) => {  
+        const {companyname,kgprice}=req.body  
         const cuantos = await Setup.find( );        
         if (cuantos.length==0) {
-            const setup = new Setup();
+            const setup = new Setup({companyname,kgprice});
             await setup.save()
             res.json({
                 setup

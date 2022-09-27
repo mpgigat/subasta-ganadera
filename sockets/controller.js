@@ -1,4 +1,5 @@
 
+
 import helpersSaleLotCattle from "../helpers/db-saleLotCattle.js";
 const subasta={
     idSaleLotCattle:"",
@@ -42,11 +43,14 @@ const socketController = (socket) => {
         socket.broadcast.emit( 'actualizar-subasta', "Desierta");
     });  
 
-    // socket.on('pidiendo-info-inicial', async ( subasta, callback ) => {
-            
-    //     callback( "Ok" );
-    //     socket.broadcast.emit( 'actualizar-subasta', "Desierta");
-    // }); 
+    socket.on('pidiendo-info-inicial', async ( callback ) => {
+        const lotCattle=await helpersSaleLotCattle.buscarLoteSubastaActual()
+       
+        if(lotCattle)        
+            callback( lotCattle ); 
+        else
+            callback("")     
+    }); 
 
 }
 
