@@ -20,7 +20,7 @@ let weight;
 const socket = io();
 
 socket.on('connect', () => {
-    socket.emit( 'pidiendo-info-inicial', ( subasta) => {
+    socket.emit( 'pidiendoinfoinicial', ( subasta) => {
         if (!subasta) return
         lbllote.innerText = `Lote ${subasta.lotcattle.lot}`; 
         lblpeso.innerText = `Peso ${subasta.lotcattle.weight}`; 
@@ -45,7 +45,7 @@ btnEnviarPrecioInicial.addEventListener( 'click', () => {
         idSaleLotCattle,
         precioInicial
     }    
-    socket.emit( 'asigne-precio-inicial', subasta, ( msg ) => {
+    socket.emit( 'asigneprecioinicial', subasta, ( msg ) => {
         console.log( msg );
     });
 
@@ -68,7 +68,7 @@ btnEnviarPuja.addEventListener( 'click', () => {
         paleta,
         total
     }    
-    socket.emit( 'guarde-puja', subasta, ( msg ) => {
+    socket.emit( 'guardepuja', subasta, ( msg ) => {
         console.log( msg );
     });
 });
@@ -79,7 +79,7 @@ btnAdjudicar.addEventListener( 'click', () => {
     const subasta = {
         idSaleLotCattle
     }    
-    socket.emit( 'adjudique-subasta', subasta, ( msg ) => {
+    socket.emit( 'adjudiquesubasta', subasta, ( msg ) => {
         console.log( msg );
     });
 });
@@ -90,7 +90,7 @@ btnDesierta.addEventListener( 'click', () => {
     const subasta = {
         idSaleLotCattle
     }    
-    socket.emit( 'declare-subasta-desierta', subasta, ( msg ) => {
+    socket.emit( 'declaresubastadesierta', subasta, ( msg ) => {
         console.log( msg );
     });
 });

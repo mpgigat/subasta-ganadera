@@ -21,7 +21,7 @@ socket.on('disconnect', () => {
 });
 
 socket.on('connect', () => {
-    socket.emit( 'pidiendo-info-inicial', ( subasta) => {
+    socket.emit( 'pidiendoinfoinicial', ( subasta) => {
         if (!subasta) return
         console.log("umm", subasta );
         lbllote.innerText = `Lote ${subasta.lotcattle.lot}`; 
@@ -47,12 +47,12 @@ socket.on('actualizarprecioinicial', ( subasta ) => {
     lblprecioinicial.innerText = `Precio Inicial ${subasta.precioInicial}`;  
 })
 
-socket.on('actualizar-puja', ( subasta ) => {
+socket.on('actualizarpuja', ( subasta ) => {
     lblprecioactual.innerText = `Precio Actual ${subasta.precioActual}`;
     lblholderactual.innerText = `Holder Actual ${subasta.holderActual} - #${subasta.paleta}`;    
 })
 
-socket.on('actualizar-subasta', ( subasta ) => {
+socket.on('actualizarsubasta', ( subasta ) => {
     lbladjudicada.innerText = `Terminada`;
 })
 

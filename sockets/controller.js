@@ -15,35 +15,35 @@ const socketController = (socket) => {
     //     console.log( msg );
     // });
 
-    socket.on('asigne-precio-inicial', async ( subasta, callback ) => {
+    socket.on('asigneprecioinicial', async ( subasta, callback ) => {
         await helpersSaleLotCattle.saleLotCattlePrecioInicial(subasta)
     
         callback( "Ok" );
         socket.broadcast.emit( 'actualizarprecioinicial', subasta);
     });
 
-    socket.on('guarde-puja', async ( subasta, callback ) => {
+    socket.on('guardepuja', async ( subasta, callback ) => {
         await helpersSaleLotCattle.saleLotCattlePujar(subasta)
     
         callback( "Ok" );
-        socket.broadcast.emit( 'actualizar-puja', subasta);
+        socket.broadcast.emit( 'actualizarpuja', subasta);
     });
 
-    socket.on('adjudique-subasta', async ( subasta, callback ) => {
+    socket.on('adjudiquesubasta', async ( subasta, callback ) => {
         await helpersSaleLotCattle.saleLotCattleAdjudicar(subasta)
     
         callback( "Ok" );
-        socket.broadcast.emit( 'actualizar-subasta', "Terminada");
+        socket.broadcast.emit( 'actualizarsubasta', "Terminada");
     });
 
-    socket.on('declare-subasta-desierta', async ( subasta, callback ) => {
+    socket.on('declaresubastadesierta', async ( subasta, callback ) => {
         await helpersSaleLotCattle.saleLotCattleDesierta(subasta)
     
         callback( "Ok" );
-        socket.broadcast.emit( 'actualizar-subasta', "Desierta");
+        socket.broadcast.emit( 'actualizarsubasta', "Desierta");
     });  
 
-    socket.on('pidiendo-info-inicial', async ( callback ) => {
+    socket.on('pidiendoinfoinicial', async ( callback ) => {
         const lotCattle=await helpersSaleLotCattle.buscarLoteSubastaActual()
        
         if(lotCattle)        
