@@ -43,7 +43,7 @@ socket.on('connect', () => {
   
 });
 
-socket.on('actualizar-precio-inicial', ( subasta ) => {
+socket.on('actualizarprecioinicial', ( subasta ) => {
     lblprecioinicial.innerText = `Precio Inicial ${subasta.precioInicial}`;  
 })
 

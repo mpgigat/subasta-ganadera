@@ -19,7 +19,7 @@ const socketController = (socket) => {
         await helpersSaleLotCattle.saleLotCattlePrecioInicial(subasta)
     
         callback( "Ok" );
-        socket.broadcast.emit( 'actualizar-precio-inicial', subasta);
+        socket.broadcast.emit( 'actualizarprecioinicial', subasta);
     });
 
     socket.on('guarde-puja', async ( subasta, callback ) => {
