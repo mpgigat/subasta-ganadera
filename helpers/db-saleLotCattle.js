@@ -38,7 +38,15 @@ const helpersSaleLotCattle = {
 
     saleLotCattlePujar: async (subasta) => {
         await SaleLotCattle
-            .findByIdAndUpdate(subasta.idSaleLotCattle, { currentpricekg: subasta.precioActual, currentholder: subasta.holderActual,currentconsecutiveholder:subasta.paleta,currentprice:subasta.total, $push: { bids: { holder: subasta.holderActual, pricekg: subasta.precioActual,consecutiveholder:subasta.paleta } } },);
+            .findByIdAndUpdate(subasta.idSaleLotCattle, 
+                {   currentpricekg: subasta.precioActual, 
+                    currentholder: subasta.holderActual,
+                    currentconsecutiveholder:subasta.paleta,
+                    currentprice:subasta.total, 
+                    $push: { bids: 
+                        { holder: subasta.holderActual, 
+                            pricekg: subasta.precioActual,
+                            consecutiveholder:subasta.paleta } } },);
 
         return await Holder.findById(subasta.holderActual)
             
