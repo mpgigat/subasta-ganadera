@@ -90,7 +90,6 @@ const saleHttp = {
         const { id } = req.params;
 
         const lotCattle=await LotCattle.findOne({sale:id,state:1})
-console.log(lotCattle);
 
         let sale
         if (!lotCattle)

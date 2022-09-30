@@ -84,7 +84,7 @@ const helpersSaleLotCattle = {
     },
 
     buscarLoteSubastaActual: async () => {
-        if (!subasta) return
+ 
         const saleLotCattle= await SaleLotCattle.findOne({state:3})   
             .populate({
                 path: "lotcattle",
