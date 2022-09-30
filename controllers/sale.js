@@ -1,6 +1,7 @@
 import tools from "../helpers/tools.js";
 import Sale from "../models/sale.js"
 import Setup from "../models/setup.js"
+import LotCattle from "../models/lotcattle.js"
 
 const saleHttp = {
 
@@ -88,7 +89,13 @@ const saleHttp = {
     saleCerrarSubasta: async (req, res) => {
         const { id } = req.params;
 
-        const sale = await Sale.findByIdAndUpdate(id, { state: 2 });
+        const lotCattle=await LotCattle.findOne({state:1})
+
+        let sale
+        if (lotCattle)
+            sale = await Sale.findByIdAndUpdate(id, { state: 2 });
+        else
+            sale="Existen lotes sin subastar, imposible cerrar"
 
         res.json({
             sale

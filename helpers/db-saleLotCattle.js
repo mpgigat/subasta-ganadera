@@ -39,6 +39,7 @@ const helpersSaleLotCattle = {
     },
 
     saleLotCattlePujar: async (subasta) => {
+        if (!subasta) return
         await SaleLotCattle
             .findByIdAndUpdate(subasta.idSaleLotCattle, 
                 {   currentpricekg: subasta.precioActual, 
@@ -55,11 +56,14 @@ const helpersSaleLotCattle = {
     },
 
     saleLotCattlePrecioInicial: async (subasta) => {
+        if (!subasta) return
+
         const saleLotCattle = await SaleLotCattle
-            .findByIdAndUpdate(subasta.idSaleLotCattle, { initialprice: subasta.precioInicial });
+            .findByIdAndUpdate(subasta.idSaleLotCattle, { initialprice: subasta.precioInicial });        
     },
 
     saleLotCattleAdjudicar: async (subasta) => {
+        if (!subasta) return
         const saleLotCattle = await SaleLotCattle
             .findByIdAndUpdate(subasta.idSaleLotCattle, { state: 2 });
         const lotCattle = await LotCattle
@@ -72,6 +76,7 @@ const helpersSaleLotCattle = {
     },
 
     saleLotCattleDesierta: async (subasta) => {
+        if (!subasta) return
         const saleLotCattle = await SaleLotCattle
             .findByIdAndUpdate(subasta.idSaleLotCattle, { state: 2 });
         const lotCattle = await LotCattle
@@ -79,6 +84,7 @@ const helpersSaleLotCattle = {
     },
 
     buscarLoteSubastaActual: async () => {
+        if (!subasta) return
         const saleLotCattle= await SaleLotCattle.findOne({state:3})   
             .populate({
                 path: "lotcattle",

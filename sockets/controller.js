@@ -1,4 +1,5 @@
 
+//al cerrar subasta no debe quedar nada pendiente.  todos o desiertos o subastados
 
 import helpersSaleLotCattle from "../helpers/db-saleLotCattle.js";
 const subasta={
