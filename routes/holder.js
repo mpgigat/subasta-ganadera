@@ -24,7 +24,6 @@ router.post('/',[
     check('name', 'El nombre es obligatorio!').not().isEmpty(),
     check('email', 'El correo no es válido').isEmail(),
     check('email').custom( helpersHolder.existeEmail ),
-    check('password', 'Password no es válido').isLength({ min: 8}),
     check("document", "El número de documento es obligatorio!").not().isEmpty(),
     check("document").custom(helpersHolder.existeNumDocumento),
     check("phone", "El número de teléfono es obligatorio!").not().isEmpty(),
