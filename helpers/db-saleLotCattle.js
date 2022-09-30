@@ -3,6 +3,7 @@ import LotCattle from "../models/lotcattle.js"
 import Holder from "../models/holder.js"
 import salelotcattle from "../models/salelotcattle.js"
 import Saleholder from "../models/saleholder.js"
+import tools from "./tools.js"
 
 const helpersSaleLotCattle = {
     existeSaleLotCattleById: async (id, req) => {
@@ -40,6 +41,7 @@ const helpersSaleLotCattle = {
 
     saleLotCattlePujar: async (subasta) => {
         if (!subasta) return
+        if (!tools.validarMongoId(subasta.holderActual)) return
         await SaleLotCattle
             .findByIdAndUpdate(subasta.idSaleLotCattle, 
                 {   currentpricekg: subasta.precioActual, 
@@ -97,7 +99,7 @@ const helpersSaleLotCattle = {
               
        const saleHolders=await Saleholder.find({ sale:saleLotCattle.sale })
        saleLotCattle.holders=saleHolders
-       console.log(saleLotCattle); 
+  
        return saleLotCattle
             
     },
