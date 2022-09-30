@@ -89,10 +89,11 @@ const saleHttp = {
     saleCerrarSubasta: async (req, res) => {
         const { id } = req.params;
 
-        const lotCattle=await LotCattle.findOne({state:1})
+        const lotCattle=await LotCattle.findOne({sale:id,state:1})
+console.log(lotCattle);
 
         let sale
-        if (lotCattle)
+        if (!lotCattle)
             sale = await Sale.findByIdAndUpdate(id, { state: 2 });
         else
             sale="Existen lotes sin subastar, imposible cerrar"
