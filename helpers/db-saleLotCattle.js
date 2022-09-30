@@ -87,7 +87,7 @@ const helpersSaleLotCattle = {
                 }
               }).lean()
 
-              
+        if (!saleLotCattle)      return {}
               
        const saleHolders=await Saleholder.find({ sale:saleLotCattle.sale })
        saleLotCattle.holders=saleHolders
