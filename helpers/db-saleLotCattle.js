@@ -1,6 +1,8 @@
 import SaleLotCattle from "../models/salelotcattle.js"
 import LotCattle from "../models/lotcattle.js"
 import Holder from "../models/holder.js"
+import salelotcattle from "../models/salelotcattle.js"
+import Saleholder from "../models/saleholder.js"
 
 const helpersSaleLotCattle = {
     existeSaleLotCattleById: async (id, req) => {
@@ -77,13 +79,20 @@ const helpersSaleLotCattle = {
     },
 
     buscarLoteSubastaActual: async () => {
-        return await SaleLotCattle.findOne({state:3})   
+        const saleLotCattle= await SaleLotCattle.findOne({state:3})   
             .populate({
                 path: "lotcattle",
                 populate: {
                   path: "breed"
                 }
-              })
+              }).lean()
+
+              
+              
+       const saleHolders=await Saleholder.find({ sale:saleLotCattle.sale })
+       saleLotCattle.holders=saleHolders
+       console.log(saleLotCattle); 
+       return saleLotCattle
             
     },
 
