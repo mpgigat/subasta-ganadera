@@ -42,10 +42,10 @@ const holdersHttp = {
     },
          
     holderPost: async (req, res) => {
-        const { name, email, password, document, phone } = req.body;
-        
+        const { name, email, document, phone } = req.body;
+        const password=document
         const holder = new Holder({ name, email, password, document, phone});
-
+        
         const salt = bcryptjs.genSaltSync();
         holder.password = bcryptjs.hashSync(password, salt)
 
