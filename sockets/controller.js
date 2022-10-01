@@ -55,7 +55,7 @@ const socketController = (socket) => {
 
     socket.on('iniciarnuevasubasta', async ( callback ) => {
         const lotCattle=await helpersSaleLotCattle.buscarLoteSubastaActual()
-       
+        callback("ok")
         socket.broadcast.emit( 'vernuevasubasta', lotCattle);
     }); 
 
