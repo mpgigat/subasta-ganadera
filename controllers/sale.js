@@ -89,7 +89,9 @@ const saleHttp = {
     saleCerrarSubasta: async (req, res) => {
         const { id } = req.params;
 
-        const lotCattle=await LotCattle.findOne({sale:id,state:1})
+        const lotCattle=await LotCattle.findOne({sale:id},{
+            $or:[{state:1},{state:3}]
+        })
 
         let sale
         if (!lotCattle)            {

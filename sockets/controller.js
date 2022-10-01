@@ -53,6 +53,12 @@ const socketController = (socket) => {
             callback("")     
     }); 
 
+    socket.on('iniciarnuevasubasta', async ( callback ) => {
+        const lotCattle=await helpersSaleLotCattle.buscarLoteSubastaActual()
+       
+        socket.broadcast.emit( 'vernuevasubasta', lotCattle);
+    }); 
+
 }
 
 
