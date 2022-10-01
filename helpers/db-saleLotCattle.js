@@ -10,7 +10,7 @@ const helpersSaleLotCattle = {
         const existe = await SaleLotCattle.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         }
 
     },
@@ -19,7 +19,7 @@ const helpersSaleLotCattle = {
         const existe = await SaleLotCattle.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         } else if (existe.state == 2)
             throw new Error(`Subasta cerrada!!!`)
     },
@@ -79,6 +79,8 @@ const helpersSaleLotCattle = {
 
     saleLotCattleDesierta: async (subasta) => {
         if (!subasta) return
+      //  console.log(subasta);
+        
         const saleLotCattle = await SaleLotCattle
             .findByIdAndUpdate(subasta.idSaleLotCattle, { state: 2 });
         const lotCattle = await LotCattle

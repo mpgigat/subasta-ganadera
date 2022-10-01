@@ -6,7 +6,7 @@ const helpersSaleHolder = {
         const existe = await SaleHolder.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         }
 
         req.req.SaleHolderUpdte = existe
@@ -16,12 +16,12 @@ const helpersSaleHolder = {
         const existe = await SaleHolder.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         } else {
             const verificarState = await Sale.findById(existe.sale)
 
             if (verificarState.state != 1) {
-                throw new Error(`No se pueden agregar lotes a esta subasta ${id}`)
+                throw new Error(`No se pueden agregar lotes o usuarios a esta subasta ${id}`)
             }
 
         }

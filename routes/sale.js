@@ -15,42 +15,42 @@ router.get('/',[
 
 router.get('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Subasta no existe').isMongoId(),
     check('id').custom(helpersSale.existeSaleById), 
     validarCampos   
 ],salesHttp.saleGetById);
 
 router.post('/',[    
     validarJWT,
-    check("type").not().isEmpty(),
+    check("type","El tipo de subasta no debe quedar vacio").not().isEmpty(),
     validarCampos       
 ],    salesHttp.salePost);
 
      
 router.put('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Subasta no existe').isMongoId(),
     check('id').custom(helpersSale.existeSaleById),
     validarCampos
 ],salesHttp.salePut);
 
 router.put('/activate/:id',[
     validarJWT, 
-    check('id').isMongoId(),
+    check('id', 'Subasta no existe').isMongoId(),
     check('id').custom(helpersSale.existeSaleById),
     validarCampos
 ],salesHttp.salePutActivate);
 
 router.put('/unactivate/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id', 'Subasta no existe').isMongoId(),
     check('id').custom(helpersSale.existeSaleById),
     validarCampos
 ],salesHttp.salePutDeactivate);
 
 router.put('/cerrarsubasta/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id', 'Subasta no existe').isMongoId(),
     check('id').custom(helpersSale.existeSaleById),
     validarCampos
 ],salesHttp.saleCerrarSubasta);

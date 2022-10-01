@@ -6,7 +6,7 @@ const helpersCattlelot = {
         const existe = await Cattlelot.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         }
 
         req.req.CattlelotUpdate = existe
@@ -16,7 +16,7 @@ const helpersCattlelot = {
         const existe = await Cattlelot.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         } else {
             const verificarState = await Sale.findById(existe.sale)
 
@@ -32,7 +32,7 @@ const helpersCattlelot = {
         const existe = await Cattlelot.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         } else {
             if (existe.state == 2) {
                 throw new Error(`Lote ya subastado ${id}`)

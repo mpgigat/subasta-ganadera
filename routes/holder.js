@@ -15,7 +15,7 @@ router.get('/',[
 
 router.get('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Usuario no existe').isMongoId(),
     check('id').custom(helpersHolder.existeHolderById), 
     validarCampos   
 ],holdersHttp.holderGetById);
@@ -33,7 +33,7 @@ router.post('/',[
      
 router.put('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Usuario no existe').isMongoId(),
     check('id').custom(helpersHolder.existeHolderById), 
     check("document").custom(helpersHolder.existeNumDocumento),
     //check('email').custom( helpersHolder.existeEmail ),
@@ -42,14 +42,14 @@ router.put('/:id',[
 
 router.put('/activate/:id',[
     validarJWT, 
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Usuario no existe').isMongoId(),
     check('id').custom(helpersHolder.existeHolderById),
     validarCampos
 ],holdersHttp.holderPutActivate);
 
 router.put('/unactivate/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Usuario no existe').isMongoId(),
     check('id').custom(helpersHolder.existeHolderById),
     validarCampos
 ],holdersHttp.holderPutDeactivate);

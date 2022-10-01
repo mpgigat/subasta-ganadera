@@ -92,14 +92,18 @@ const saleHttp = {
         const lotCattle=await LotCattle.findOne({sale:id,state:1})
 
         let sale
-        if (!lotCattle)
-            sale = await Sale.findByIdAndUpdate(id, { state: 2 });
-        else
+        if (!lotCattle)            {
+                sale = await Sale.findByIdAndUpdate(id, { state: 2 });
+                res.json({
+                    sale
+                })
+        }else{
             sale="Existen lotes sin subastar, imposible cerrar"
-
-        res.json({
-            sale
-        })
+            res.status(400).json({
+                sale
+            })
+        }
+        
     },
 
 }

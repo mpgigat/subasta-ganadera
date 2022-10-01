@@ -12,7 +12,7 @@ const router=Router();
 
 router.get('/subasta/:sale',[
     validarJWT,
-    check('sale').isMongoId(),
+    check('sale',"Subasta no existe").isMongoId(),
     check("sale").custom(helpersSale.existeSaleById),
     validarCampos   
 ],saleholderHttp.saleHolderGetSubasta);
@@ -20,16 +20,16 @@ router.get('/subasta/:sale',[
 
 router.get('/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id',"Registro no existe").isMongoId(),
     check('id').custom(helpersSaleHolder.existeSaleHolderById), 
     validarCampos   
 ],saleholderHttp.saleHolderGetById);
 
 router.post('/',[    
     validarJWT,
-    check('sale').isMongoId(),
+    check('sale',"Subasta no existe").isMongoId(),
     check("sale").custom(helpersSale.existeSaleState),
-    check('holder').isMongoId(),
+    check('holder',"Usuario no existe").isMongoId(),
     check("holder").custom(helpersHolder.existeHolderById),
     
     validarCampos       
@@ -38,23 +38,23 @@ router.post('/',[
      
 router.put('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', "Registro no existe").isMongoId(),
     check('id').custom(helpersSaleHolder.existeSaleHolderById),
-    check('holder', 'No es un ID válido').isMongoId(),
+    check('holder', "Usuario no existe").isMongoId(),
     check('holder').custom(helpersHolder.existeHolderById),
     validarCampos
 ],saleholderHttp.saleHolderPut);
 
 router.put('/activate/:id',[
     validarJWT, 
-    check('id').isMongoId(),
+    check('id',"Registro no existe").isMongoId(),
     check('id').custom(helpersSaleHolder.existeSaleHolderById),
     validarCampos
 ],saleholderHttp.saleHolderPutActivate);
 
 router.put('/unactivate/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id',"Registro no existe").isMongoId(),
     check('id').custom(helpersSaleHolder.existeSaleHolderById),
     validarCampos
 ],saleholderHttp.saleHolderPutDeactivate);

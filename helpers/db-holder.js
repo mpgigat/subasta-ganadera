@@ -6,7 +6,7 @@ const helpersHolder = {
         const existe = await Holder.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         }
 
         req.req.holderUpdate = existe
@@ -40,7 +40,7 @@ const helpersHolder = {
             if (existe) {
                 if (req.req.method === "PUT") {
                     if (existe.email !== req.req.holder.email)
-                        throw new Error(`Ya existe ese serial en la base de datos!!! ${email}`)
+                        throw new Error(`Ya existe ese email en la base de datos!!! ${email}`)
 
                 } else {
                     throw new Error(`Ya existe ese email en la base de datos!!! ${email}`)
@@ -67,7 +67,7 @@ const helpersHolder = {
             if (existe) {
                 if (req.req.method === "PUT") {
                     if (existe._id.toString() !== req.req.holder._id.toString())
-                        throw new Error(`Ya existe ese serial en la base de datos!!! ${document}`)
+                        throw new Error(`Ya existe ese email en la base de datos!!! ${document}`)
 
                 } else {
                     throw new Error(`Ya existe ese documento en la base de datos!!! ${document}`)

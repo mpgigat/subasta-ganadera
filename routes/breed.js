@@ -16,14 +16,14 @@ router.get('/',[
 
 router.get('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Raza no existe').isMongoId(),
     check('id').custom(helpersBreed.existeBreedById), 
     validarCampos   
 ],breedHttp.breedGetById);
 
 router.post('/',[   
     validarJWT, 
-    check("description").not().isEmpty(),
+    check("description","La descripción es obligatoria").not().isEmpty(),
     check("description").custom(helpersBreed.existeDescription),
     validarCampos       
 ],    breedHttp.breedPost);
@@ -31,21 +31,21 @@ router.post('/',[
      
 router.put('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', 'Raza a modificar no existe').isMongoId(),
     check('id').custom(helpersBreed.existeBreedById),
     validarCampos
 ],breedHttp.breedPut);
 
 router.put('/activate/:id',[
     validarJWT, 
-    check('id').isMongoId(),
+    check('id',"Raza no existe").isMongoId(),
     check('id').custom(helpersBreed.existeBreedById),
     validarCampos
 ],breedHttp.breedPutActivate);
 
 router.put('/unactivate/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id',"Raza no existe").isMongoId(),
     check('id').custom(helpersBreed.existeBreedById),
     validarCampos
 ],breedHttp.breedPutDeactivate);

@@ -12,47 +12,47 @@ const router=Router();
 
 router.get('/subasta/:sale',[
     validarJWT,
-    check('sale').isMongoId(),
+    check('sale',"Subasta no existe").isMongoId(),
     check("sale").custom(helpersSale.existeSaleById),
     validarCampos   
 ],cattleLotHttp.cattleLotGetSubasta);
 
 router.get('/puja/:sale',[
     validarJWT,
-    check('sale').isMongoId(),
+    check('sale',"Subasta no existe").isMongoId(),
     check("sale").custom(helpersSale.existeSaleById),
     validarCampos   
 ],cattleLotHttp.cattleLotGetPuja);
 
 router.get('/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id',"Lote a subastar no existe").isMongoId(),
     check('id').custom(helpersCattlelot.existeCattlelotById), 
     validarCampos   
 ],cattleLotHttp.cattleLotGetById);
 
 router.post('/',[    
     validarJWT,
-    check('sale').isMongoId(),
+    check('sale', "Subasta no existe").isMongoId(),
     check("sale").custom(helpersSale.existeSaleState),
-    check('provider').isMongoId(),
+    check('provider',"Proveedor no existe").isMongoId(),
     check("provider").custom(helpersHolder.existeHolderById),
-    check('origin').not().isEmpty(),
-    check('quantity').isNumeric(),
-    check('classcattle').not().isEmpty(),
-    check('weight').isNumeric(),
-    check('calfmale').isNumeric(),
-    check('calffemale').isNumeric(),
-    check('breed').isMongoId(),
+    check('origin',"El origen es no debe quedar vacio").not().isEmpty(),
+    check('quantity',"La cantidad debe ser numerica").isNumeric(),
+    check('classcattle',"Clase no debe quedar vacio").not().isEmpty(),
+    check('weight',"El peso es un valor numerico").isNumeric(),
+    check('calfmale','Cantidad de crias es valor numerico').isNumeric(),
+    check('calffemale','Cantidad de crias es valor numerico').isNumeric(),
+    check('breed', "Raza no existe").isMongoId(),
     check("breed").custom(helpersBreed.existeBreedById),
-    check('ica').not().isEmpty(),
+    check('ica',"El campo ica no debe estar vacio").not().isEmpty(),
     validarCampos       
 ],    cattleLotHttp.cattleLotPost);
 
      
 router.put('/:id',[
     validarJWT,
-    check('id', 'No es un ID válido').isMongoId(),
+    check('id', "Lote a subastar no existe").isMongoId(),
     check('id').custom(helpersCattlelot.existeCattlelotVerificarState),
     
     validarCampos
@@ -60,14 +60,14 @@ router.put('/:id',[
 
 router.put('/activate/:id',[
     validarJWT, 
-    check('id').isMongoId(),
+    check('id', "Lote a subastar no existe").isMongoId(),
     check('id').custom(helpersCattlelot.existeCattlelotById),
     validarCampos
 ],cattleLotHttp.cattleLotPutActivate);
 
 router.put('/unactivate/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id', "Lote a subastar no existe").isMongoId(),
     check('id').custom(helpersCattlelot.existeCattlelotById),
     validarCampos
 ],cattleLotHttp.cattleLotPutDeactivate);

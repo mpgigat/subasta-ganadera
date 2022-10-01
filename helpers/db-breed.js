@@ -6,7 +6,7 @@ const helpersBreed = {
         const existe = await Breed.findById(id)
 
         if (!existe) {
-            throw new Error(`El id no existe ${id}`)
+            throw new Error(`Registro no existe ${id}`)
         }
 
         req.req.saleUpdate = existe

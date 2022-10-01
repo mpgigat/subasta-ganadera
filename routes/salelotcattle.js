@@ -12,7 +12,7 @@ const router=Router();
 
 router.get('/subasta/:sale',[
     validarJWT,
-    check('sale').isMongoId(),
+    check('sale',"Subasta no existe").isMongoId(),
     check("sale").custom(helpersSale.existeSaleById),
     validarCampos   
 ],saleLotCattleHttp.saleLotCattleGetSubasta);
@@ -20,14 +20,14 @@ router.get('/subasta/:sale',[
 
 router.get('/:id',[
     validarJWT,
-    check('id').isMongoId(),
+    check('id',"Registro no existe").isMongoId(),
     check('id').custom(helpersSaleLotCattle.existeSaleLotCattleById), 
     validarCampos   
 ],saleLotCattleHttp.saleLotCattleGetById);
 
 router.post('/',[    
     validarJWT,
-    check('lotcattle').isMongoId(),
+    check('lotcattle',"Registro no existe").isMongoId(),
     check('lotcattle').custom(helpersLotCattle.existeCattlelotVerificarState),
     check("lotcattle").custom(helpersLotCattle.existeCattlelotVerificarStateLoteSubasta),    
     check("lotcattle").custom(helpersSaleLotCattle.existeOtroLoteEnSubasta),
