@@ -76,7 +76,7 @@ const helpersSaleLotCattle = {
                 pricekg:saleLotCattle.currentpricekg
             });
 
-        return lotCattle
+        return 2
     },
 
     saleLotCattleDesierta: async (subasta) => {

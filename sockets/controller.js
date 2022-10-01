@@ -40,7 +40,7 @@ const socketController = (socket) => {
     socket.on('declaresubastadesierta', async ( subasta, callback ) => {
         await helpersSaleLotCattle.saleLotCattleDesierta(subasta)
     
-        callback( "Ok" );
+        callback( 2);
         socket.broadcast.emit( 'actualizarsubasta', "Desierta");
     });  
 
