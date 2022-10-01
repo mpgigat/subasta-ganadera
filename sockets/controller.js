@@ -2,6 +2,7 @@
 //al cerrar subasta no debe quedar nada pendiente.  todos o desiertos o subastados
 
 import helpersSaleLotCattle from "../helpers/db-saleLotCattle.js";
+import lotcattle from "../models/lotcattle.js";
 const subasta={
     idSaleLotCattle:"",
     precioInicial:0,
@@ -48,9 +49,16 @@ const socketController = (socket) => {
         const lotCattle=await helpersSaleLotCattle.buscarLoteSubastaActual()
        
         if(lotCattle)        
-            callback( lotCattle ); 
+     {       callback( lotCattle ); 
+        console.log(lotcattle);
+        
+            socket.broadcast.emit( 'vernuevasubasta', lotCattle);
+
+        }
         else
             callback("")     
+
+        
     }); 
 
     socket.on('iniciarnuevasubasta', async ( callback ) => {
