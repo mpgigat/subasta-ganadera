@@ -31,10 +31,10 @@ const socketController = (socket) => {
     });
 
     socket.on('adjudiquesubasta', async ( subasta, callback ) => {
-        await helpersSaleLotCattle.saleLotCattleAdjudicar(subasta)
+        const lotCattle= await helpersSaleLotCattle.saleLotCattleAdjudicar(subasta)
     
-        callback( "Ok" );
-        socket.broadcast.emit( 'actualizarsubasta', "Terminada");
+        callback( lotCattle.state );
+        socket.broadcast.emit( 'actualizarsubasta',"Terminada");
     });
 
     socket.on('declaresubastadesierta', async ( subasta, callback ) => {

@@ -75,6 +75,8 @@ const helpersSaleLotCattle = {
                 price: saleLotCattle.currentprice,
                 pricekg:saleLotCattle.currentpricekg
             });
+
+        return lotCattle
     },
 
     saleLotCattleDesierta: async (subasta) => {
