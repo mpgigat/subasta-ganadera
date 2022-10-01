@@ -51,7 +51,6 @@ const socketController = (socket) => {
         if (lotCattle) {            
             callback(lotCattle);
             socket.broadcast.emit('vernuevasubasta', lotCattle);
-            console.log(lotCattle);
         }
         else
             callback("")
