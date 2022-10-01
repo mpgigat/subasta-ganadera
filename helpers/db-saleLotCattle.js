@@ -87,6 +87,7 @@ const helpersSaleLotCattle = {
             .findByIdAndUpdate(subasta.idSaleLotCattle, { state: 2 });
         const lotCattle = await LotCattle
             .findByIdAndUpdate(saleLotCattle.lotcattle, {state: 2 });
+        return 2
     },
 
     buscarLoteSubastaActual: async () => {
