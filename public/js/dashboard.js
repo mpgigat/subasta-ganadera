@@ -20,6 +20,10 @@ socket.on('disconnect', () => {
     console.log("Desconectado");
 });
 
+socket.on('actualizarestado', (lotes) => {
+    console.log('Lotes: ',lotes);
+});
+
 socket.on('connect', () => {
     socket.emit( 'pidiendoinfoinicial', ( subasta) => {
         if (!subasta) return

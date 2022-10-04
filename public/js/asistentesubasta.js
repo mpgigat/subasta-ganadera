@@ -15,7 +15,6 @@ const btnEnviarPuja  = document.querySelector('#btnEnviarPuja');
 const btnAdjudicar  = document.querySelector('#btnAdjudicar');
 const btnDesierta  = document.querySelector('#btnDesierta');
 
-const txtidsala=document.querySelector('#txtidsala')
 const btnPedirLotes  = document.querySelector('#btnPedirLotes');
 
 let weight;
@@ -23,6 +22,8 @@ let weight;
 const socket = io();
 
 socket.on('connect', () => {
+    console.log("listos");
+    
     socket.emit( 'pidiendoinfoinicial', ( subasta) => {
         if (!subasta) return
         lbllote.innerText = `Lote ${subasta.lotcattle.lot}`; 
@@ -38,6 +39,8 @@ socket.on('connect', () => {
 socket.on('disconnect', () => {
     console.log('Desconectado del servidor');
 });
+
+
 
 btnEnviarPrecioInicial.addEventListener( 'click', () => {
 
@@ -83,7 +86,7 @@ btnAdjudicar.addEventListener( 'click', () => {
         idSaleLotCattle
     }    
     socket.emit( 'adjudiquesubasta', subasta, ( msg ) => {
-        console.log( msg );
+       // console.log( msg );
     });
 });
 
@@ -99,9 +102,9 @@ btnDesierta.addEventListener( 'click', () => {
 });
 
 btnPedirLotes.addEventListener( 'click', () => {
-    const idsala = txtidsala.value;
+
    
-    socket.emit( 'lotessubasta', idsala, ( msg ) => {
+    socket.emit( 'lotessubasta',  ( msg ) => {
         console.log( msg );
     });
 });

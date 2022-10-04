@@ -42,11 +42,10 @@ const helpersCattlelot = {
         req.req.CattlelotUpdate = existe
     },
 
-    getLotCattleSale:async(sale)=>{
-
-        if (! sale)return
-        if (! tools.validarMongoId(sale)) return
-        const cattleLot = await Cattlelot.find({sale})
+    getLotCattleSale:async()=>{
+        const sale =await Sale.findOne({state:1})
+        if (!sale._id) return
+        const cattleLot = await Cattlelot.find({sale:sale._id})
             .populate("sale")
             .populate("provider")
             .populate("breed")

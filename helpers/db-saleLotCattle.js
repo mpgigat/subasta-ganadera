@@ -76,7 +76,7 @@ const helpersSaleLotCattle = {
                 pricekg:saleLotCattle.currentpricekg
             });
 
-        return 2
+        return lotCattle
     },
 
     saleLotCattleDesierta: async (subasta) => {
@@ -87,7 +87,7 @@ const helpersSaleLotCattle = {
             .findByIdAndUpdate(subasta.idSaleLotCattle, { state: 2 });
         const lotCattle = await LotCattle
             .findByIdAndUpdate(saleLotCattle.lotcattle, {state: 2 });
-        return 2
+        return lotCattle
     },
 
     buscarLoteSubastaActual: async () => {
