@@ -27,6 +27,8 @@ router.post('/',[
     check("document", "El número de documento es obligatorio!").not().isEmpty(),
     check("document").custom(helpersHolder.existeNumDocumento),
     check("phone", "El número de teléfono es obligatorio!").not().isEmpty(),
+    check("ciudad", "La ciudad es obligatoria!").not().isEmpty(),
+    check("direccion", "La dirección es obligatoria!").not().isEmpty(),
     validarCampos       
 ],    holdersHttp.holderPost);
 
