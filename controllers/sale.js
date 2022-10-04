@@ -88,11 +88,12 @@ const saleHttp = {
 
     saleCerrarSubasta: async (req, res) => {
         const { id } = req.params;
-
+        console.log("control 2");
+        
         const lotCattle=await LotCattle.findOne({sale:id},{
             $or:[{state:1},{state:3}]
         })
-
+        console.log("control 3");
         let sale
         if (!lotCattle)            {
                 sale = await Sale.findByIdAndUpdate(id, { state: 2 });

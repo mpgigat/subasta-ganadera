@@ -3,12 +3,15 @@ import Sale from "../models/sale.js"
 
 const helpersSale = {
     existeSaleById: async (id, req) => {
+        console.log("control 1");
+        
         const existe = await Sale.findById(id)
 
         if (!existe) {
             throw new Error(`El id no existe ${id}`)
         }
-
+        console.log(existe);
+        
         req.req.saleUpdate = existe
 
     },
