@@ -32,23 +32,23 @@ const saleHttp = {
             sale
         })
     },
-         
+
     salePost: async (req, res) => {
-        const {  type } = req.body;     
-        const setup = await Setup.findOne( ); 
-        let consecutivesale=0
+        const { type } = req.body;
+        const setup = await Setup.findOne();
+        let consecutivesale = 0
         if (!setup) {
             const nuevosetup = new Setup();
             await nuevosetup.save()
-            consecutivesale=1
-        } else{
-            consecutivesale=setup.consecutivesale+1
-        } 
-        await Sale.findOneAndUpdate({state:1},{state:2});
-        const salenumber=tools.rellenarCeros(consecutivesale)
-        const sale = new Sale({ salenumber,type});
+            consecutivesale = 1
+        } else {
+            consecutivesale = setup.consecutivesale + 1
+        }
+        await Sale.findOneAndUpdate({ state: 1 }, { state: 2 });
+        const salenumber = tools.rellenarCeros(consecutivesale)
+        const sale = new Sale({ salenumber, type });
         await sale.save()
-        await Setup.findOneAndUpdate({},{consecutivesale});        
+        await Setup.findOneAndUpdate({}, { consecutivesale });
         res.json({
             sale
         })
@@ -57,7 +57,7 @@ const saleHttp = {
     salePut: async (req, res) => {
         const { id } = req.params;
 
-        let { _id,  state, salenumber, createdAt, ...resto } = req.body;
+        let { _id, state, salenumber, createdAt, ...resto } = req.body;
 
         const sale = await Sale.findByIdAndUpdate(id, resto);
 
@@ -88,25 +88,28 @@ const saleHttp = {
 
     saleCerrarSubasta: async (req, res) => {
         const { id } = req.params;
-        console.log("control 2");
-        
-        const lotCattle=await LotCattle.findOne({sale:id},{
-            $or:[{state:1},{state:3}]
+
+        const lotCattle=await LotCattle.findOne({
+            $and: [
+                { sale:id},
+                { $or: [{ state: 1 }, { state: 3 }] }
+            ]
         })
+
         console.log("control 3");
         let sale
-        if (!lotCattle)            {
-                sale = await Sale.findByIdAndUpdate(id, { state: 2 });
-                res.json({
-                    sale
-                })
-        }else{
-            sale="Existen lotes sin subastar, imposible cerrar"
+        if (!lotCattle) {
+            sale = await Sale.findByIdAndUpdate(id, { state: 2 });
+            res.json({
+                sale
+            })
+        } else {
+            sale = "Existen lotes sin subastar, imposible cerrar"
             res.status(400).json({
                 sale
             })
         }
-        
+
     },
 
 }
