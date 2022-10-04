@@ -27,13 +27,13 @@ const saleHolderHttp = {
     },
 
     saleHolderPost: async (req, res) => {
-        const { sale, holder } = req.body;
-        const subasta = await Sale.findById(sale);
-        const consecutiveholder = subasta.consecutiveholder + 1
+        const { sale, holder,consecutiveholder } = req.body;
+        //const subasta = await Sale.findById(sale);
+        //const consecutiveholder = subasta.consecutiveholder + 1
 
         const saleHolder = new SaleHolder({ sale, holder, consecutiveholder });
         await saleHolder.save()
-        await Sale.findByIdAndUpdate(sale, { consecutiveholder });
+        //await Sale.findByIdAndUpdate(sale, { consecutiveholder });
         res.json({
             saleHolder
         })

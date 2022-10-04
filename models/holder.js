@@ -14,7 +14,8 @@ const holderSchema=new mongoose.Schema({
     banco2:{type:String},
     banco2numero:{type:String},
     banco3:{type:String},
-    banco3numero:{type:String},    
+    banco3numero:{type:String}, 
+    referidopor:{type:String}, 
     createdAt:{type:Date,default:Date.now   }
 })
 

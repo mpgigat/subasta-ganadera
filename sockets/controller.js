@@ -1,6 +1,7 @@
 
 //al cerrar subasta no debe quedar nada pendiente.  todos o desiertos o subastados
 
+import helpersCattlelot from "../helpers/db-catllelot.js";
 import helpersSaleLotCattle from "../helpers/db-saleLotCattle.js";
 import lotcattle from "../models/lotcattle.js";
 const subasta = {
@@ -64,6 +65,10 @@ const socketController = (socket) => {
         socket.broadcast.emit('vernuevasubasta', lotCattle);
     });
 
+    socket.on('lotessubasta', async (sale,callback) => {
+        const lotCattle= await helpersCattlelot.getLotCattleSale(sale)
+        callback(lotCattle)
+    });
 }
 
 

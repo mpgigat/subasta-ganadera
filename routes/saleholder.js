@@ -31,7 +31,8 @@ router.post('/',[
     check("sale").custom(helpersSale.existeSaleState),
     check('holder',"Usuario no existe").isMongoId(),
     check("holder").custom(helpersHolder.existeHolderById),
-    
+    check("consecutiveholder","El numero de la paleta es obligatoria").not().isEmpty(),
+    check("consecutiveholder","El numero de la paleta es obligatoria").isNumeric(),
     validarCampos       
 ],    saleholderHttp.saleHolderPost);
 
@@ -58,9 +59,6 @@ router.put('/unactivate/:id',[
     check('id').custom(helpersSaleHolder.existeSaleHolderById),
     validarCampos
 ],saleholderHttp.saleHolderPutDeactivate);
-
-
-
 
 
 export default router

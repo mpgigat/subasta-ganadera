@@ -29,6 +29,7 @@ router.post('/',[
     check("phone", "El número de teléfono es obligatorio!").not().isEmpty(),
     check("ciudad", "La ciudad es obligatoria!").not().isEmpty(),
     check("direccion", "La dirección es obligatoria!").not().isEmpty(),
+    check("referidopor", "El campo referido por es obligatorio!").not().isEmpty(),
     validarCampos       
 ],    holdersHttp.holderPost);
 
@@ -110,3 +111,4 @@ router.post("/passwordreset", [
 
  
 export default router
+

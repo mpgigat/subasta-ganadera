@@ -43,11 +43,11 @@ const cattleLotHttp = {
     },
 
     cattleLotPost: async (req, res) => {
-        const { sale, provider, origin, quantity, classcattle, weight, calfmale, calffemale, breed, ica } = req.body;
+        const { sale, provider, origin, quantity, classcattle, weight, calfmale, calffemale, breed, ica ,observations} = req.body;
         const subasta = await Sale.findById(sale);
         const lot = subasta.consecutivelot + 1
         const weightavg = (weight / quantity).toFixed(1)
-        const catllelot = new Lotcattle({ sale, provider, origin, lot, quantity, classcattle, weight, weightavg, calfmale, calffemale, breed, ica });
+        const catllelot = new Lotcattle({ sale, provider, origin, lot, quantity, classcattle, weight, weightavg, calfmale, calffemale, breed, ica ,observations});
         await catllelot.save()
         await Sale.findByIdAndUpdate(sale, { consecutivelot: lot });
         res.json({
@@ -76,6 +76,7 @@ const cattleLotHttp = {
         resto = tools.actualizarRestoNumeros("weight", resto.weight, resto)
         resto = tools.actualizarRestoNumeros("calfmale", resto.calfmale, resto)
         resto = tools.actualizarRestoNumeros("calffemale", resto.calffemale, resto)
+        resto = tools.actualizarRestoNumeros("observations", resto.observations, resto)
         if (resto.breed != undefined) {
             if (tools.validarMongoId(resto.breed)) {
                 if (! await helpersBreed.existeBreedByIdFn(resto.breed)) {

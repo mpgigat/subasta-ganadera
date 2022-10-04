@@ -1,5 +1,6 @@
 import Cattlelot from "../models/lotcattle.js"
 import Sale from "../models/sale.js"
+import tools from "./tools.js"
 
 const helpersCattlelot = {
     existeCattlelotById: async (id, req) => {
@@ -40,6 +41,19 @@ const helpersCattlelot = {
         }
         req.req.CattlelotUpdate = existe
     },
+
+    getLotCattleSale:async(sale)=>{
+
+        if (! sale)return
+        if (! tools.validarMongoId(sale)) return
+        const cattleLot = await Cattlelot.find({sale})
+            .populate("sale")
+            .populate("provider")
+            .populate("breed")
+            .populate("awarded")
+        
+        return cattleLot
+    }
     
 }
 export default helpersCattlelot

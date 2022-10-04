@@ -42,9 +42,9 @@ const holdersHttp = {
     },
          
     holderPost: async (req, res) => {
-        const { name, email, document, phone,ciudad,direccion,banco1,banco1numero,banco2,banco2numero,banco3,banco3numero } = req.body;
+        const { name, email, document, phone,ciudad,direccion,banco1,banco1numero,banco2,banco2numero,banco3,banco3numero ,referidopor} = req.body;
         const password=document
-        const holder = new Holder({ name, email, password, document, phone,ciudad,direccion,banco1,banco1numero,banco2,banco2numero,banco3,banco3numero});
+        const holder = new Holder({ name, email, password, document, phone,ciudad,direccion,banco1,banco1numero,banco2,banco2numero,banco3,banco3numero,referidopor});
         
         const salt = bcryptjs.genSaltSync();
         holder.password = bcryptjs.hashSync(password, salt)
@@ -72,7 +72,7 @@ const holdersHttp = {
         resto=tools.actualizarResto("banco2numero", resto.banco2numero,resto)
         resto=tools.actualizarResto("banco3",       resto.banco3,resto)
         resto=tools.actualizarResto("banco3numero", resto.banco3numero,resto)
-
+        resto=tools.actualizarResto("referidopor",  resto.referidopor,resto)
         const holder = await Holder.findByIdAndUpdate(id, resto);
 
         res.json({

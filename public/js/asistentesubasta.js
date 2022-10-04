@@ -15,6 +15,9 @@ const btnEnviarPuja  = document.querySelector('#btnEnviarPuja');
 const btnAdjudicar  = document.querySelector('#btnAdjudicar');
 const btnDesierta  = document.querySelector('#btnDesierta');
 
+const txtidsala=document.querySelector('#txtidsala')
+const btnPedirLotes  = document.querySelector('#btnPedirLotes');
+
 let weight;
 
 const socket = io();
@@ -91,6 +94,14 @@ btnDesierta.addEventListener( 'click', () => {
         idSaleLotCattle
     }    
     socket.emit( 'declaresubastadesierta', subasta, ( msg ) => {
+        console.log( msg );
+    });
+});
+
+btnPedirLotes.addEventListener( 'click', () => {
+    const idsala = txtidsala.value;
+   
+    socket.emit( 'lotessubasta', idsala, ( msg ) => {
         console.log( msg );
     });
 });
