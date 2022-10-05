@@ -48,8 +48,8 @@ const socketController = (socket) => {
         callback(lotCattle);
         socket.broadcast.emit('actualizarsubasta', "Desierta");
 
-        // const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale)
-        // socket.broadcast.emit('actualizarestado', estados);
+        const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
+        socket.broadcast.emit('actualizarestado', estados);
 
     });
 
@@ -70,8 +70,8 @@ const socketController = (socket) => {
         socket.broadcast.emit('vernuevasubasta', lotCattle);
     });
 
-    socket.on('lotessubasta', async (callback) => {
-        const lotCattle= await helpersCattlelot.getLotCattleSale()
+    socket.on('lotessubasta', async (idsala,callback) => {
+        const lotCattle= await helpersCattlelot.getLotCattleSale(idsala)
         callback(lotCattle)
     });
 }

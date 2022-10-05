@@ -42,10 +42,11 @@ const helpersCattlelot = {
         req.req.CattlelotUpdate = existe
     },
 
-    getLotCattleSale:async()=>{
-        const sale =await Sale.findOne({state:1})
-        if (!sale._id) return
-        const cattleLot = await Cattlelot.find({sale:sale._id})
+    getLotCattleSale:async(idsale)=>{
+        let sale=idsale
+        if (!idsale) sale =await Sale.findOne({state:1})
+        if (!sale) return
+        const cattleLot = await Cattlelot.find({sale})
             .populate("sale")
             .populate("provider")
             .populate("breed")
