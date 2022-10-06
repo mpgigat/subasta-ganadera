@@ -35,7 +35,7 @@ const socketController = (socket) => {
     socket.on('adjudiquesubasta', async (subasta, callback) => {
         const lotCattle = await helpersSaleLotCattle.saleLotCattleAdjudicar(subasta)
 
-        callback(lotCattle);
+        callback({lotCattle,state:2});
         socket.broadcast.emit('actualizarsubasta', "Terminada");
 
         const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
@@ -45,7 +45,7 @@ const socketController = (socket) => {
     socket.on('declaresubastadesierta', async (subasta, callback) => {
         const lotCattle = await helpersSaleLotCattle.saleLotCattleDesierta(subasta)
 
-        callback(lotCattle);
+        callback({lotCattle,state:2});
         socket.broadcast.emit('actualizarsubasta', "Desierta");
 
         const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
