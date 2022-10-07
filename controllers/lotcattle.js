@@ -20,8 +20,10 @@ const cattleLotHttp = {
     cattleLotGetPuja: async (req, res) => {
         const {sale}=req.params
         const cattleLot = await Lotcattle.find({sale})
-            .populate("sale")
-            .populate("breed")
+        .populate("sale")
+        .populate("provider")
+        .populate("breed")
+        .populate("awarded")
 
         res.json({
             cattleLot
@@ -29,9 +31,7 @@ const cattleLotHttp = {
     },
 
     cattleLotGetById: async (req, res) => {
-
         const { id } = req.params;
-
         const cattleLot = await Lotcattle.findOne({ _id: id })
             .populate("sale")
             .populate("provider")
