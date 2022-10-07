@@ -75,6 +75,7 @@ const helpersSaleLotCattle = {
                 price: saleLotCattle.currentprice,
                 pricekg:saleLotCattle.currentpricekg,
                 initialprice:saleLotCattle.initialprice,
+                currentconsecutiveholder:saleLotCattle.currentconsecutiveholder
             });
 
         return lotCattle

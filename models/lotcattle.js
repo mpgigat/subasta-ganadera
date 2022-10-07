@@ -15,6 +15,7 @@ const cattleLotSchema=new mongoose.Schema({
     ica:{type:String,required:true},
     state:{type:String,default:1},
     awarded:{type:mongoose.Schema.Types.ObjectId,ref:'Holder'},
+    currentconsecutiveholder:{type:Number,default:0},
     price:{type:Number,default:0},
     pricekg:{type:Number,default:0},
     initialprice:{type:Number,default:0},
