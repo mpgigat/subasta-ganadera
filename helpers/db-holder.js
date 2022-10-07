@@ -66,8 +66,8 @@ const helpersHolder = {
             const existe = await Holder.findOne({ document })
             if (existe) {
                 if (req.req.method === "PUT") {
-                    if (existe._id.toString() !== req.req.holder._id.toString())
-                        throw new Error(`Ya existe ese email en la base de datos!!! ${document}`)
+                    if (existe._id.toString() !== req.req.holderUpdate._id.toString())
+                        throw new Error(`Ya existe ese documento en la base de datos!!! ${document}`)
 
                 } else {
                     throw new Error(`Ya existe ese documento en la base de datos!!! ${document}`)
