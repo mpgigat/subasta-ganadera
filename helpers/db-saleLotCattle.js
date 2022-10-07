@@ -73,7 +73,8 @@ const helpersSaleLotCattle = {
                 awarded: saleLotCattle.currentholder,
                 state: 2, 
                 price: saleLotCattle.currentprice,
-                pricekg:saleLotCattle.currentpricekg
+                pricekg:saleLotCattle.currentpricekg,
+                initialprice:saleLotCattle.initialprice,
             });
 
         return lotCattle
