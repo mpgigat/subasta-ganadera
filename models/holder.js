@@ -16,6 +16,7 @@ const holderSchema=new mongoose.Schema({
     banco3:{type:String},
     banco3numero:{type:String}, 
     referidopor:{type:String}, 
+    phonereferred:{type:String},  
     createdAt:{type:Date,default:Date.now   }
 })
 
