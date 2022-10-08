@@ -40,8 +40,15 @@ const saleLotCattleHttp = {
                 populate: {
                     path: "sale"
                 }
-            }).populate("currentholder").
-            populate("bids.holder")
+            })
+            .populate("currentholder")
+            .populate("bids.holder")
+            .populate({
+                path: "lotcattle",
+                populate: {
+                    path: "awarded"
+                }
+            })
         res.json({
             saleLotCattle
         })
@@ -49,17 +56,17 @@ const saleLotCattleHttp = {
 
     saleLotCattlePost: async (req, res) => {
         const { lotcattle } = req.body;
-        const { sale ,weight} = req.CattlelotUpdate
-        const saleLotCattle = new SaleLotCattle({ lotcattle, sale,weight });
+        const { sale, weight } = req.CattlelotUpdate
+        const saleLotCattle = new SaleLotCattle({ lotcattle, sale, weight });
         await saleLotCattle.save()
         await LotCattle
-            .findByIdAndUpdate(saleLotCattle.lotcattle,{ state: 3 });
+            .findByIdAndUpdate(saleLotCattle.lotcattle, { state: 3 });
         res.json({
             saleLotCattle
         })
     },
 
-    
+
 
 }
 
