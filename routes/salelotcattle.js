@@ -25,6 +25,13 @@ router.get('/:id',[
     validarCampos   
 ],saleLotCattleHttp.saleLotCattleGetById);
 
+router.get('/subasta/lote/:lotcattle',[
+    validarJWT,
+    check('lotcattle',"Lote no existe").isMongoId(),
+    check("lotcattle").custom(helpersLotCattle.existeCattlelotById),
+    validarCampos   
+],saleLotCattleHttp.saleLotCattleGetByLote);
+
 router.post('/',[    
     validarJWT,
     check('lotcattle',"Registro no existe").isMongoId(),

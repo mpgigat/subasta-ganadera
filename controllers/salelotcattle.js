@@ -30,6 +30,23 @@ const saleLotCattleHttp = {
         })
     },
 
+    saleLotCattleGetByLote: async (req, res) => {
+
+        const { lotcattle } = req.params;
+
+        const saleLotCattle = await SaleLotCattle.findOne({ lotcattle })
+            .populate({
+                path: "lotcattle",
+                populate: {
+                    path: "sale"
+                }
+            }).populate("currentholder").
+            populate("bids.holder")
+        res.json({
+            saleLotCattle
+        })
+    },
+
     saleLotCattlePost: async (req, res) => {
         const { lotcattle } = req.body;
         const { sale ,weight} = req.CattlelotUpdate
