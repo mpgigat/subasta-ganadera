@@ -82,7 +82,9 @@ const helpersCattlelot = {
 
         if (!cattleLot) return {}
 
-        const saleHolders = await SaleHolder.find({ sale: cattleLot.sale })
+        const saleHolders = await SaleHolder
+            .find({ sale: cattleLot.sale })
+            .populate("holder")
         cattleLot.holders = saleHolders
 
         return cattleLot
