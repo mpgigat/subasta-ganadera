@@ -30,6 +30,7 @@ socket.on('actualizarestado', (lotes) => {
 socket.on('connect', () => {
     socket.emit( 'pidiendoinfoinicial', ( lotcattle) => {
         if (!lotcattle) return
+        console.log(lotcattle);
         
         lbllote.innerText = `Lote ${lotcattle.lot}`; 
         lblpeso.innerText = `Peso ${lotcattle.weight}`; 

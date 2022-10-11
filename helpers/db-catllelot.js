@@ -78,7 +78,7 @@ const helpersCattlelot = {
             .populate("breed")
             .populate("awarded")
             .populate("awardedtemp")
-            .populate("bids.holder")
+            .populate("bids.holder").lean()
 
         if (!cattleLot) return {}
 

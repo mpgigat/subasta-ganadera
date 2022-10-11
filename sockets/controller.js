@@ -16,7 +16,6 @@ const socketController = (socket) => {
 
     socket.on('pidiendoinfoinicial', async (callback) => {
         const lotCattle = await helpersCattlelot.buscarLoteSubastaActual()
-console.log(lotCattle.holders);
 
         if (lotCattle.sale) {            
             callback(lotCattle);
