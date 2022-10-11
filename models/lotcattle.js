@@ -14,13 +14,34 @@ const cattleLotSchema=new mongoose.Schema({
     breed:{type:mongoose.Schema.Types.ObjectId,ref:'Breed',required:true},
     ica:{type:String,required:true},
     state:{type:String,default:1},
-    awarded:{type:mongoose.Schema.Types.ObjectId,ref:'Holder'},
-    currentconsecutiveholder:{type:Number,default:0},
-    price:{type:Number,default:0},
-    pricekg:{type:Number,default:0},
+    salestate:{type:String,default:"En espera"},
+    saletype:{type:Number,default:0},  //0en espera, 1 subasta  2: remate
+
     initialprice:{type:Number,default:0},
+    pricetoget:{type:Number,default:0},
+
+    awarded:{type:mongoose.Schema.Types.ObjectId,ref:'Holder',default:null},    
+    consecutiveholder:{type:Number,default:0},  
+    totalprice:{type:Number,default:0},
+    pricekg:{type:Number,default:0},    
+    valueperanimal:{type:Number,default:0},
+
+    awardedtemp:{type:mongoose.Schema.Types.ObjectId,ref:'Holder',default:null},
+    consecutiveholdertemp:{type:Number,default:0},
+    totalpricetemp:{type:Number,default:0},
+    pricekgtemp:{type:Number,default:0}, 
+    valueperanimaltemp:{type:Number,default:0},
+
     observations:{type:String},
-    createdAt:{type:Date,default:Date.now   }
+    createdAt:{type:Date,default:Date.now   },
+    bids:[
+        {
+            holder:{type:mongoose.Schema.Types.ObjectId,ref:'Holder'},
+            price:{type:Number,default:0},
+            consecutiveholder:{type:Number,default:0},
+            valueperanimal:{type:Number,default:0}
+        }
+    ],
 })
 
 export default mongoose.model("Lotcattle",cattleLotSchema)

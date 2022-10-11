@@ -33,6 +33,7 @@ router.post('/',[
     check("holder").custom(helpersHolder.existeHolderById),
     check("consecutiveholder","El numero de la paleta es obligatoria").not().isEmpty(),
     check("consecutiveholder","El numero de la paleta es obligatoria").isNumeric(),
+    check("consecutiveholder","Ya existe esepaleta en la subasta").custom(helpersSaleHolder.existePaleta),
     validarCampos       
 ],    saleholderHttp.saleHolderPost);
 

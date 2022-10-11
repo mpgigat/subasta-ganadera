@@ -12,49 +12,10 @@ const subasta = {
 }
 const socketController = (socket) => {
     // Cuando un cliente se conecta
-    console.log("se conecto ", socket.id);
-
-    // socket.emit( 'actualizar', subasta, ( msg ) => {
-    //     console.log( msg );
-    // });
-
-    socket.on('asigneprecioinicial', async (subasta, callback) => {
-        await helpersSaleLotCattle.saleLotCattlePrecioInicial(subasta)
-
-        callback("Ok");
-        socket.broadcast.emit('actualizarprecioinicial', subasta);
-    });
-
-    socket.on('guardepuja', async (subasta, callback) => {
-        await helpersSaleLotCattle.saleLotCattlePujar(subasta)
-
-        callback("Ok");
-        socket.broadcast.emit('actualizarpuja', subasta);
-    });
-
-    socket.on('adjudiquesubasta', async (subasta, callback) => {
-        const lotCattle = await helpersSaleLotCattle.saleLotCattleAdjudicar(subasta)
-
-        callback({lotCattle,state:2});
-        socket.broadcast.emit('actualizarsubasta', "Terminada");
-
-        const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
-        socket.broadcast.emit('actualizarestado', estados);
-    });
-
-    socket.on('declaresubastadesierta', async (subasta, callback) => {
-        const lotCattle = await helpersSaleLotCattle.saleLotCattleDesierta(subasta)
-
-        callback({lotCattle,state:2});
-        socket.broadcast.emit('actualizarsubasta', "Desierta");
-
-        const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
-        socket.broadcast.emit('actualizarestado', estados);
-
-    });
+    //console.log("se conecto ", socket.id);
 
     socket.on('pidiendoinfoinicial', async (callback) => {
-        const lotCattle = await helpersSaleLotCattle.buscarLoteSubastaActual()
+        const lotCattle = await helpersCattlelot.buscarLoteSubastaActual()
 
         if (lotCattle.sale) {            
             callback(lotCattle);
@@ -64,8 +25,59 @@ const socketController = (socket) => {
             callback("")
     });
 
+    socket.on('asigneprecioinicial', async (subasta, callback) => {
+        const lotCattle=await helpersCattlelot.setLotCattlePrecioInicial(subasta)
+
+        callback(lotCattle);
+        socket.broadcast.emit('actualizarprecioinicial', lotCattle);
+    });
+
+    socket.on('guardepuja', async (subasta, callback) => {
+       
+        const lotCattle=await helpersCattlelot.setPuja(subasta)
+
+        callback(lotCattle);
+        socket.broadcast.emit('actualizarpuja', lotCattle);
+    });
+
+    socket.on('guarderemate', async (subasta, callback) => {
+        const lotCattle=await helpersCattlelot.setRemate(subasta)
+
+        callback(lotCattle);
+        socket.broadcast.emit('actualizarpuja', lotCattle);
+    });
+
+    socket.on('actualiceprecioesperado', async (subasta, callback) => {
+        const lotCattle=await helpersCattlelot.setPrecioEsperado(subasta)
+
+        callback(lotCattle);
+        socket.broadcast.emit('actualizarpuja', lotCattle);
+    });
+
+    socket.on('adjudiquesubasta', async (subasta, callback) => {
+        const lotCattle = await helpersCattlelot.setAdjudicar(subasta)
+
+        callback({lotCattle,state:2});
+        socket.broadcast.emit('actualizarsubasta', lotCattle);
+
+        const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
+        socket.broadcast.emit('actualizarestado', estados);
+    });
+
+    socket.on('declaresubastadesierta', async (subasta, callback) => {
+        const lotCattle = await helpersCattlelot.setDesierta(subasta)
+
+        callback({lotCattle,state:2});
+        socket.broadcast.emit('actualizarsubasta',lotCattle);
+
+        const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
+        socket.broadcast.emit('actualizarestado', estados);
+
+    });
+
+    
     socket.on('iniciarnuevasubasta', async (callback) => {
-        const lotCattle = await helpersSaleLotCattle.buscarLoteSubastaActual()
+        const lotCattle = await helpersCattlelot.buscarLoteSubastaActual()
         callback("ok")
         socket.broadcast.emit('vernuevasubasta', lotCattle);
     });
@@ -73,6 +85,16 @@ const socketController = (socket) => {
     socket.on('lotessubasta', async (idsala,callback) => {
         const lotCattle= await helpersCattlelot.getLotCattleSale(idsala)
         callback(lotCattle)
+    });
+
+    socket.on('reiniciarsubasta', async (subasta, callback) => {
+        const lotCattle = await helpersCattlelot.setReiniciar(subasta)
+
+        callback({lotCattle});
+
+        const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
+        socket.broadcast.emit('actualizarestado', estados);
+
     });
 }
 

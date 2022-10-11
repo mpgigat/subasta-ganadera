@@ -27,6 +27,23 @@ const helpersSaleHolder = {
         }
 
     },
+    existePaleta: async (paleta, req) => {
+        if (paleta) {
+            const existe = await SaleHolder.findOne({$and:[
+                {sale: req.req.saleUpdate._id},
+                {consecutiveholder:paleta}
+            ] })
+            if (existe) {
+                if (req.req.method === "PUT") {
+                    if (existe._id.toString() !== req.req.holderUpdate._id.toString())
+                        throw new Error(`Ya existe esepaleta en la subasta!!! ${paleta}`)
+
+                } else {
+                    throw new Error(`Ya existe esa paleta en la subasta!!! ${paleta}`)
+                }
+            }
+        }
+    },
 }
 export default helpersSaleHolder
 

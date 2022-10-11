@@ -12,6 +12,7 @@ const cattleLotHttp = {
             .populate("provider")
             .populate("breed")
             .populate("awarded")
+            .populate("bids.holder")
         res.json({
             cattleLot
         })
@@ -43,7 +44,9 @@ const cattleLotHttp = {
     },
 
     cattleLotPost: async (req, res) => {
-        const { sale, provider, origin, quantity, classcattle, weight, calfmale, calffemale, breed, ica ,observations} = req.body;
+        const { sale, provider, origin, quantity, classcattle, 
+            weight, calfmale, calffemale, breed, ica ,observations,
+        } = req.body;
         const subasta = await Sale.findById(sale);
         const lot = subasta.consecutivelot + 1
         const weightavg = (weight / quantity).toFixed(1)
@@ -132,6 +135,30 @@ const cattleLotHttp = {
 
         res.json({
             cattleLot
+        })
+    },
+    cattleLotPutSubastar: async (req, res) => {        
+        const {id}=req.params
+
+        const lotCattle=await Lotcattle
+            .findByIdAndUpdate(id, 
+                { state: 3,
+                    salestate:"En subasta",
+                  saletype:1 });
+
+        res.json({
+            lotCattle
+        })
+    },
+    cattleLotPutRematar: async (req, res) => {        
+        const {id}=req.params
+        const lotCattle=await Lotcattle
+            .findByIdAndUpdate(id, 
+                { state: 3,
+                  salestate:"En remate",
+                  saletype:2 });
+        res.json({
+            lotCattle
         })
     },
 

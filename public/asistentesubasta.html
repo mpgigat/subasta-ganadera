@@ -19,17 +19,26 @@
     <hr>
     <hr>
     <h1>Asistente Subasta</h1>
-    <input type="text" id="txtidsalelotcattle" placeholder="Id SaleLotCattle">
+    <input type="text" id="txtidlotcattle" placeholder="Id LotCattle" value="6344d3ce42960443a43d9ff4">
+    <input type="text" id="txtholderactual" placeholder="Holder Actual" value="63193ae5ae93abcdd314de46">
+    <input type="text" id="txtpaleta" placeholder="Paleta" value="5">    
     <hr>
     <br>
     <input type="text" id="txtprecioinicial" placeholder="Precio Inicial">
     <input type="button" id="btnEnviarPrecioInicial" value="Enviar Precio Inicial">
     <hr>    
     <br> 
-    <input type="text" id="txtprecioactual" placeholder="Precio Actual">
-    <input type="text" id="txtholderactual" placeholder="Holder Actual">    
-    <input type="text" id="txtpaleta" placeholder="Paleta">    
+    <input type="text" id="txtprecioactual" placeholder="Precio Actual" value="9000">     
+    <input type="text" id="txtincremento" placeholder="Valor incremento" value="100">     
     <input type="button" id="btnEnviarPuja" value="Enviar Puja">
+    <hr>
+    <br>
+    <input type="text" id="txtprecioremate" placeholder="Precio Remate">
+    <input type="button" id="btnEnviarRemate" value="Enviar Remate">
+    <hr>
+    <br>
+    <input type="text" id="txtprecioesperado" placeholder="Precio Esperado">
+    <input type="button" id="btnprecioesperado" value="Enviar Precio Esperado">
     <hr>
     <br>
     <input type="button" id="btnAdjudicar" value="Adjudicar Subasta">
@@ -39,10 +48,13 @@
     <hr>
     <br>
     <input type="button" id="btnPedirLotes" value="Pedir Lotes a Subastar">
+    <hr>
+    <br>
+    <input type="button" id="btnreiniciar" value="Reinicia subasta del lote">
 
 
     <script src="./socket.io/socket.io.js"></script>
-    <script src="js/asistentesubasta.js"></script>
+    <script src="asistentesubasta.js"></script>
 </body>
 
 </html>

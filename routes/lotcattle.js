@@ -72,5 +72,22 @@ router.put('/unactivate/:id',[
     validarCampos
 ],cattleLotHttp.cattleLotPutDeactivate);
 
+router.put('/subastar/:id',[
+    validarJWT,
+    check('id', "Lote a subastar no existe").isMongoId(),
+    check('id').custom(helpersCattlelot.existeCattlelotById),    
+    check("id").custom(helpersCattlelot.existeCattlelotVerificarStateLoteSubasta),    
+    check("id").custom(helpersCattlelot.existeOtroLoteEnSubasta),
+    validarCampos
+],cattleLotHttp.cattleLotPutSubastar);
+
+router.put('/rematar/:id',[
+    validarJWT,
+    check('id', "Lote a rematar no existe").isMongoId(),
+    check('id').custom(helpersCattlelot.existeCattlelotById),
+    check("id").custom(helpersCattlelot.existeCattlelotVerificarStateLoteSubasta),    
+    check("id").custom(helpersCattlelot.existeOtroLoteEnSubasta),
+    validarCampos
+],cattleLotHttp.cattleLotPutRematar);
 
 export default router
