@@ -212,7 +212,9 @@ const helpersCattlelot = {
                     totalprice:0,
                     pricekg:0,
                     valueperanimal:0,
-
+                    initialprice:0,
+                    pricetoget:0,
+                    saletype:0,
                     awardedtemp:null,
                     consecutiveholdertemp:0,
                     totalpricetemp:0,

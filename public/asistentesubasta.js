@@ -155,7 +155,8 @@ btnreiniciar.addEventListener('click', () => {
     const subasta = {
         idLotCattle
     }
-    socket.emit('reinciarsubasta’', subasta, (msg) => {
+    
+    socket.emit('reiniciarsubasta', subasta, (msg) => {
         console.log(msg);
     });
 });
