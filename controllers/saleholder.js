@@ -73,7 +73,7 @@ const saleHolderHttp = {
         const saleHolder=await SaleHolder.deleteMany();
 
         res.json({
-            lotCattle
+            saleHolder
         })
     },
 
