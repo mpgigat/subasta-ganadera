@@ -46,7 +46,7 @@ const helpersCattlelot = {
     },
 
     getLotCattleSale: async (sale) => {
-       
+
         const cattleLot = await Cattlelot.find({ sale })
             .populate("sale")
             .populate("provider")
@@ -109,9 +109,9 @@ const helpersCattlelot = {
                         {
                             holder: subasta.holderActual,
                             consecutiveholder: subasta.paleta,
-                            pricekg: subasta.precioPuja,                            
+                            pricekg: subasta.precioPuja,
                             valueperanimal: valueperanimal,
-                            totalprice:subasta.total
+                            totalprice: subasta.total
                         }
                     }
                 },)
@@ -148,9 +148,9 @@ const helpersCattlelot = {
                         {
                             holder: subasta.holderActual,
                             consecutiveholder: subasta.paleta,
-                            pricekg: subasta.preciokg,                            
+                            pricekg: subasta.preciokg,
                             valueperanimal: valueperanimal,
-                            totalprice:subasta.total
+                            totalprice: subasta.total
                         }
                     }
                 },);
@@ -164,7 +164,7 @@ const helpersCattlelot = {
 
         const actual = await Cattlelot.findById(subasta.idLotCattle);
 
-        const lotCattle = await Cattlelot
+        const existe = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle, {
                 awarded: actual.awardedtemp,
                 consecutiveholder: actual.consecutiveholdertemp,
@@ -174,6 +174,8 @@ const helpersCattlelot = {
                 state: 2,
                 salestate: "Terminada"
             })
+
+        const lotCattle = await Cattlelot.findById(existe._id)
             .populate("sale")
             .populate("provider")
             .populate("breed")
@@ -181,25 +183,28 @@ const helpersCattlelot = {
             .populate("awardedtemp")
             .populate("bids.holder");
 
-        return await helpersCattlelot.buscarLoteSubastaActual()
+        return lotCattle
     },
 
     setDesierta: async (subasta) => {
         if (!subasta.idLotCattle) return
 
-        const lotCattle = await Cattlelot
+        const existe = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
                 {
                     state: 2,
                     salestate: "Terminada Desierta"
                 })
+
+        const lotCattle = await Cattlelot
+            .findById(existe._id)
             .populate("sale")
             .populate("provider")
             .populate("breed")
             .populate("awarded")
             .populate("awardedtemp")
-            .populate("bids.holder");;
-        return await helpersCattlelot.buscarLoteSubastaActual()
+            .populate("bids.holder");
+        return lotCattle
     },
 
     setReiniciar: async (subasta) => {
@@ -210,20 +215,20 @@ const helpersCattlelot = {
                 {
                     state: 1,
                     salestate: "En espera",
-                    awarded:null,
-                    consecutiveholder:0,
-                    totalprice:0,
-                    pricekg:0,
-                    valueperanimal:0,
-                    initialprice:0,
-                    pricetoget:0,
-                    saletype:0,
-                    awardedtemp:null,
-                    consecutiveholdertemp:0,
-                    totalpricetemp:0,
-                    pricekgtemp:0,
-                    valueperanimaltemp:0,
-                    bids:[]
+                    awarded: null,
+                    consecutiveholder: 0,
+                    totalprice: 0,
+                    pricekg: 0,
+                    valueperanimal: 0,
+                    initialprice: 0,
+                    pricetoget: 0,
+                    saletype: 0,
+                    awardedtemp: null,
+                    consecutiveholdertemp: 0,
+                    totalpricetemp: 0,
+                    pricekgtemp: 0,
+                    valueperanimaltemp: 0,
+                    bids: []
                 })
         return lotCattle
     },
@@ -248,8 +253,8 @@ const helpersCattlelot = {
 
         await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
-                {                    
-                    $pop: {bids:1}
+                {
+                    $pop: { bids: 1 }
                 },);
 
         return await helpersCattlelot.buscarLoteSubastaActual()
