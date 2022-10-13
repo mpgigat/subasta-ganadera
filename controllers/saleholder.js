@@ -70,7 +70,7 @@ const saleHolderHttp = {
     },
     
     deleteAll: async (req, res) => {        
-        const saleHolder=await SaleHolder.deleteAll();
+        const saleHolder=await SaleHolder.deleteMany();
 
         res.json({
             lotCattle

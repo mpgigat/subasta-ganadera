@@ -113,7 +113,7 @@ const saleHttp = {
     },
 
     deleteAll: async (req, res) => {        
-        const sale=await Sale.deleteAll();
+        const sale=await Sale.deleteMany();
 
         res.json({
             sale
