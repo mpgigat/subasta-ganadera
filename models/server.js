@@ -10,7 +10,7 @@ import lotcattle from '../routes/lotcattle.js';
 import http from 'http'
 import * as io from "socket.io"
 import saleholder from '../routes/saleholder.js';
-import saleLotCattle from "../routes/salelotcattle.js"
+
 
 import { socketController } from '../sockets/controller.js';
 
@@ -44,7 +44,7 @@ class Server{
         this.app.use("/api/breed",    breed); 
         this.app.use("/api/lotcattle",    lotcattle); 
         this.app.use("/api/saleholder",    saleholder); 
-        this.app.use("/api/salelotcattle",    saleLotCattle); 
+
     }
 
     sockets() {
