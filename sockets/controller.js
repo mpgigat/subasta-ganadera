@@ -93,9 +93,8 @@ const socketController = (socket) => {
     socket.on('reiniciarsubasta', async (subasta, callback) => {
         const lotCattle = await helpersCattlelot.setReiniciar(subasta)
 
-        callback({lotCattle});
-
         const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
+        callback({lotCattle,estados});
         socket.broadcast.emit('actualizarestado', estados);
 
     });
