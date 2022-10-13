@@ -103,10 +103,8 @@ const socketController = (socket) => {
     socket.on('elimineultima', async (subasta, callback) => {
         const lotCattle = await helpersCattlelot.setElimineUltima(subasta)
 
-        callback({lotCattle});
-
-        const estados= await helpersCattlelot.getLotCattleSale(lotCattle.sale) 
-        socket.broadcast.emit('actualizarestado', estados);
+        callback(lotCattle);
+        socket.broadcast.emit('actualizarpuja', lotCattle);
 
     });
 }
