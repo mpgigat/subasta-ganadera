@@ -53,6 +53,7 @@ const helpersCattlelot = {
             .populate("breed")
             .populate("awarded")
             .populate("awardedtemp")
+            .populate("bids.holder")
         return cattleLot
     },
     setLotCattlePrecioInicial: async (subasta) => {
