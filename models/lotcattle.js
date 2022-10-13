@@ -37,9 +37,10 @@ const cattleLotSchema=new mongoose.Schema({
     bids:[
         {
             holder:{type:mongoose.Schema.Types.ObjectId,ref:'Holder'},
-            price:{type:Number,default:0},
+            totalprice:{type:Number,default:0},
             consecutiveholder:{type:Number,default:0},
-            valueperanimal:{type:Number,default:0}
+            valueperanimal:{type:Number,default:0},
+            pricekg:{type:Number,default:0},
         }
     ],
 })

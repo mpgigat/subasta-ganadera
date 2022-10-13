@@ -94,6 +94,7 @@ const helpersCattlelot = {
 
         const valueperanimal = subasta.total / subasta.cantidad
         const pricetoget = parseInt(subasta.precioPuja) + parseInt(subasta.incremento)
+        
         const lotCattle = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
                 {
@@ -107,9 +108,10 @@ const helpersCattlelot = {
                         bids:
                         {
                             holder: subasta.holderActual,
-                            price: subasta.precioPuja,
                             consecutiveholder: subasta.paleta,
-                            valueperanimal: valueperanimal
+                            pricekg: subasta.precioPuja,                            
+                            valueperanimal: valueperanimal,
+                            totalprice:subasta.total
                         }
                     }
                 },)
@@ -145,9 +147,10 @@ const helpersCattlelot = {
                         bids:
                         {
                             holder: subasta.holderActual,
-                            price: subasta.total,
                             consecutiveholder: subasta.paleta,
+                            pricekg: subasta.preciokg,                            
                             valueperanimal: valueperanimal,
+                            totalprice:subasta.total
                         }
                     }
                 },);
