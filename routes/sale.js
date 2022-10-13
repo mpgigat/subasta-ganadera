@@ -55,4 +55,9 @@ router.put('/cerrarsubasta/:id',[
     validarCampos
 ],salesHttp.saleCerrarSubasta);
 
+router.delete('/eliminartodoojo',[
+    validarJWT,
+    validarCampos
+],cattleLotHttp.deleteAll);
+
 export default router

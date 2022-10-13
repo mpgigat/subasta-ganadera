@@ -68,8 +68,14 @@ const saleHolderHttp = {
             saleHolder
         })
     },
-
     
+    deleteAll: async (req, res) => {        
+        const saleHolder=await SaleHolder.deleteAll();
+
+        res.json({
+            lotCattle
+        })
+    },
 
 }
 

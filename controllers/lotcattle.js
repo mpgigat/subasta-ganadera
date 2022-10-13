@@ -162,6 +162,14 @@ const cattleLotHttp = {
         })
     },
 
+    deleteAll: async (req, res) => {        
+        const lotCattle=await Lotcattle
+            .deleteAll();
+        res.json({
+            lotCattle
+        })
+    },
+
    
 
     

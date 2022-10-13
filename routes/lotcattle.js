@@ -90,4 +90,10 @@ router.put('/rematar/:id',[
     validarCampos
 ],cattleLotHttp.cattleLotPutRematar);
 
+router.delete('/eliminartodoojo',[
+    validarJWT,
+    validarCampos
+],cattleLotHttp.deleteAll);
+
+
 export default router

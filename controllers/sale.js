@@ -112,6 +112,14 @@ const saleHttp = {
 
     },
 
+    deleteAll: async (req, res) => {        
+        const sale=await Sale.deleteAll();
+
+        res.json({
+            sale
+        })
+    },
+
 }
 
 export default saleHttp
