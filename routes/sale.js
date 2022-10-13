@@ -58,6 +58,6 @@ router.put('/cerrarsubasta/:id',[
 router.delete('/eliminartodoojo',[
     validarJWT,
     validarCampos
-],cattleLotHttp.deleteAll);
+],salesHttp.deleteAll);
 
 export default router

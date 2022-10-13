@@ -64,6 +64,6 @@ router.put('/unactivate/:id',[
 router.delete('/eliminartodoojo',[
     validarJWT,
     validarCampos
-],cattleLotHttp.deleteAll);
+],saleholderHttp.deleteAll);
 
 export default router
