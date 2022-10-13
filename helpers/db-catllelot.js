@@ -222,7 +222,8 @@ const helpersCattlelot = {
                     consecutiveholdertemp:0,
                     totalpricetemp:0,
                     pricekgtemp:0,
-                    valueperanimaltemp:0
+                    valueperanimaltemp:0,
+                    bids:[]
                 })
         return lotCattle
     },
