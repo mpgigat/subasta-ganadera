@@ -181,7 +181,7 @@ const helpersCattlelot = {
             .populate("awardedtemp")
             .populate("bids.holder");
 
-        return lotCattle
+        return await helpersCattlelot.buscarLoteSubastaActual()
     },
 
     setDesierta: async (subasta) => {
@@ -199,7 +199,7 @@ const helpersCattlelot = {
             .populate("awarded")
             .populate("awardedtemp")
             .populate("bids.holder");;
-        return lotCattle
+        return await helpersCattlelot.buscarLoteSubastaActual()
     },
 
     setReiniciar: async (subasta) => {
