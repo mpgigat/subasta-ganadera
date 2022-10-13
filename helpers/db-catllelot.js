@@ -94,7 +94,7 @@ const helpersCattlelot = {
 
         const valueperanimal = subasta.total / subasta.cantidad
         const pricetoget = parseInt(subasta.precioPuja) + parseInt(subasta.incremento)
-        
+
         const lotCattle = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
                 {
@@ -240,6 +240,19 @@ const helpersCattlelot = {
         if (existe) {
             throw new Error(`Otro lote se esta subastando actualmente`)
         }
+    },
+
+    setElimineUltima: async (subasta) => {
+        if (!subasta.idLotCattle) return
+
+        await Cattlelot
+            .findByIdAndUpdate(subasta.idLotCattle,
+                {                    
+                    $pop: {bids:1}
+                },);
+
+        return await helpersCattlelot.buscarLoteSubastaActual()
+
     },
 
 
