@@ -13,6 +13,8 @@ const helpersCattlelot = {
             throw new Error(`Registro no existe ${id}`)
         }
 
+        
+
         req.req.CattlelotUpdate = existe
 
     },
@@ -22,6 +24,9 @@ const helpersCattlelot = {
         if (!existe) {
             throw new Error(`Registro no existe ${id}`)
         } else {
+            
+            if(existe.state!=1) throw new Error(`Lote ya subastado o en proceso!!`)
+
             const verificarState = await Sale.findById(existe.sale)
 
             if (verificarState.state != 1) {
