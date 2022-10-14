@@ -252,11 +252,21 @@ const helpersCattlelot = {
     setElimineUltima: async (subasta) => {
         if (!subasta.idLotCattle) return
 
-        await Cattlelot
+        const lotCattle = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
                 {
                     $pop: { bids: 1 }
                 },);
+
+        console.log("miguel",lotCattle);
+        
+
+        // const subasta = {
+        //     idLotCattle:lotCattle._id,
+        //     precioEsperado:lotCattle
+        // }
+
+        //const lotCattle = await helpersCattlelot.setPrecioEsperado(subasta)
 
         return await helpersCattlelot.buscarLoteSubastaActual()
 
