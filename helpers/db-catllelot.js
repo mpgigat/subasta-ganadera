@@ -157,14 +157,14 @@ const helpersCattlelot = {
 
     setPrecioEsperado: async (subasta) => {
         if (!subasta.idLotCattle) return
-        if (!subasta.cantidad) return
+        
         if (!tools.validarMongoId(subasta.idLotCattle)) return
-        const getvalueperanimal = subasta.precioEsperado / subasta.cantidad
+        //const getvalueperanimal = subasta.precioEsperado / subasta.cantidad
         const lotCattle = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle, 
                 { 
                     pricetoget: subasta.precioEsperado ,
-                    getvalueperanimaltemp: getvalueperanimal,    
+                 //   getvalueperanimaltemp: getvalueperanimal,    
                 },)
 
         return await helpersCattlelot.buscarLoteSubastaActual()
