@@ -31,6 +31,7 @@ const cattleLotSchema=new mongoose.Schema({
     totalpricetemp:{type:Number,default:0},
     pricekgtemp:{type:Number,default:0}, 
     valueperanimaltemp:{type:Number,default:0},
+    getvalueperanimaltemp:{type:Number,default:0},
 
     observations:{type:String},
     createdAt:{type:Date,default:Date.now   },

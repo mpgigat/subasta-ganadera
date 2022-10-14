@@ -129,7 +129,7 @@ const helpersCattlelot = {
 
         const valueperanimal = subasta.total / subasta.cantidad
         const pricetoget = parseInt(subasta.precioPuja) + parseInt(subasta.incremento)
-
+        const getvalueperanimal = pricetoget / subasta.cantidad
         const lotCattle = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
                 {
@@ -138,6 +138,7 @@ const helpersCattlelot = {
                     pricekgtemp: subasta.precioPuja,
                     totalpricetemp: subasta.total,
                     valueperanimaltemp: valueperanimal,
+                    getvalueperanimaltemp: getvalueperanimal,
                     pricetoget,
                     $push: {
                         bids:
@@ -156,10 +157,15 @@ const helpersCattlelot = {
 
     setPrecioEsperado: async (subasta) => {
         if (!subasta.idLotCattle) return
+        if (!subasta.cantidad) return
         if (!tools.validarMongoId(subasta.idLotCattle)) return
-
+        const getvalueperanimal = subasta.precioEsperado / subasta.cantidad
         const lotCattle = await Cattlelot
-            .findByIdAndUpdate(subasta.idLotCattle, { pricetoget: subasta.precioEsperado },)
+            .findByIdAndUpdate(subasta.idLotCattle, 
+                { 
+                    pricetoget: subasta.precioEsperado ,
+                    getvalueperanimaltemp: getvalueperanimal,    
+                },)
 
         return await helpersCattlelot.buscarLoteSubastaActual()
     },
@@ -169,6 +175,7 @@ const helpersCattlelot = {
         if (!tools.validarMongoId(subasta.holderActual)) return
         const valueperanimal = subasta.total / subasta.cantidad
         const pricetoget = parseInt(subasta.total) + parseInt(subasta.incremento)
+        const getvalueperanimal = pricetoget / subasta.cantidad
         await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
                 {
@@ -185,7 +192,8 @@ const helpersCattlelot = {
                             consecutiveholder: subasta.paleta,
                             pricekg: subasta.preciokg,
                             valueperanimal: valueperanimal,
-                            totalprice: subasta.total
+                            totalprice: subasta.total,
+                            getvalueperanimaltemp: getvalueperanimal,  
                         }
                     }
                 },);
