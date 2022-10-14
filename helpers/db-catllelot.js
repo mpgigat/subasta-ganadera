@@ -18,6 +18,33 @@ const helpersCattlelot = {
         req.req.CattlelotUpdate = existe
 
     },
+
+    verificarSubasta: async (id, req) => {
+        const existe = await Cattlelot.findById(id)
+
+        if (!existe) {
+            throw new Error(`Registro no existe ${id}`)
+        }
+
+        if(existe.saletype==2) throw new Error(`El lote esta en remate, deberá reiniciarlo si quiere subastarlo`)
+        else if(existe.saletype==1) req.req.iniciado = true
+        else req.req.iniciado = false
+
+    },
+
+    verificarRemate: async (id, req) => {
+        const existe = await Cattlelot.findById(id)
+
+        if (!existe) {
+            throw new Error(`Registro no existe ${id}`)
+        }
+
+        if(existe.saletype==1) throw new Error(`El lote esta en subasta, deberá reiniciarlo si quiere rematarlo`)
+        else if(existe.saletype==2) req.req.iniciado = true
+        else req.req.iniciado = false
+
+    },
+
     existeCattlelotVerificarState: async (id) => {
         const existe = await Cattlelot.findById(id)
 
@@ -43,7 +70,7 @@ const helpersCattlelot = {
         if (!existe) {
             throw new Error(`Registro no existe ${id}`)
         } else {
-            if(existe.state!=1) throw new Error(`Lote ya subastado o en proceso!!`)
+            //if(existe.state!=1) throw new Error(`Lote ya subastado o en proceso!!`)
             
             if (existe.state == 2) {
                 throw new Error(`Lote ya subastado ${id}`)
@@ -244,6 +271,7 @@ const helpersCattlelot = {
     existeOtroLoteEnSubasta: async (idLotCattle, req) => {
         //const lotCattle=await LotCattle.findById(idLotCattle)
         const sale = req.req.CattlelotUpdate.sale;
+        
         const existe = await Cattlelot.findOne({
             $and: [
                 { sale },
@@ -251,7 +279,7 @@ const helpersCattlelot = {
             ]
         })
 
-        if (existe) {
+        if (existe  && existe._id!=idLotCattle) {
             throw new Error(`Otro lote se esta subastando actualmente`)
         }
 

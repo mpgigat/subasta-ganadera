@@ -78,6 +78,7 @@ router.put('/subastar/:id',[
     check('id').custom(helpersCattlelot.existeCattlelotById),    
     check("id").custom(helpersCattlelot.existeCattlelotVerificarStateLoteSubasta),    
     check("id").custom(helpersCattlelot.existeOtroLoteEnSubasta),
+    check("id").custom(helpersCattlelot.verificarSubasta),
     validarCampos
 ],cattleLotHttp.cattleLotPutSubastar);
 
@@ -87,6 +88,7 @@ router.put('/rematar/:id',[
     check('id').custom(helpersCattlelot.existeCattlelotById),
     check("id").custom(helpersCattlelot.existeCattlelotVerificarStateLoteSubasta),    
     check("id").custom(helpersCattlelot.existeOtroLoteEnSubasta),
+    check("id").custom(helpersCattlelot.verificarRemate),
     validarCampos
 ],cattleLotHttp.cattleLotPutRematar);
 

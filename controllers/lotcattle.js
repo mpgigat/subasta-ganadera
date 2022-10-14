@@ -6,8 +6,8 @@ import Sale from "../models/sale.js"
 
 const cattleLotHttp = {
     cattleLotGetSubasta: async (req, res) => {
-        const {sale}=req.params
-        const cattleLot = await Lotcattle.find({sale})
+        const { sale } = req.params
+        const cattleLot = await Lotcattle.find({ sale })
             .populate("sale")
             .populate("provider")
             .populate("breed")
@@ -19,12 +19,12 @@ const cattleLotHttp = {
     },
 
     cattleLotGetPuja: async (req, res) => {
-        const {sale}=req.params
-        const cattleLot = await Lotcattle.find({sale})
-        .populate("sale")
-        .populate("provider")
-        .populate("breed")
-        .populate("awarded")
+        const { sale } = req.params
+        const cattleLot = await Lotcattle.find({ sale })
+            .populate("sale")
+            .populate("provider")
+            .populate("breed")
+            .populate("awarded")
 
         res.json({
             cattleLot
@@ -44,13 +44,13 @@ const cattleLotHttp = {
     },
 
     cattleLotPost: async (req, res) => {
-        const { sale, provider, origin, quantity, classcattle, 
-            weight, calfmale, calffemale, breed, ica ,observations,
+        const { sale, provider, origin, quantity, classcattle,
+            weight, calfmale, calffemale, breed, ica, observations,
         } = req.body;
         const subasta = await Sale.findById(sale);
         const lot = subasta.consecutivelot + 1
         const weightavg = (weight / quantity).toFixed(1)
-        const catllelot = new Lotcattle({ sale, provider, origin, lot, quantity, classcattle, weight, weightavg, calfmale, calffemale, breed, ica ,observations});
+        const catllelot = new Lotcattle({ sale, provider, origin, lot, quantity, classcattle, weight, weightavg, calfmale, calffemale, breed, ica, observations });
         await catllelot.save()
         await Sale.findByIdAndUpdate(sale, { consecutivelot: lot });
         res.json({
@@ -95,22 +95,22 @@ const cattleLotHttp = {
 
         if (Object.entries(resto).length !== 0) {
             const catllelot = await Lotcattle.findByIdAndUpdate(id, resto);
-            if(Object.keys(resto).includes("weight") || Object.keys(resto).includes("quantity")){
-                const existe=await Lotcattle.findById(id)
+            if (Object.keys(resto).includes("weight") || Object.keys(resto).includes("quantity")) {
+                const existe = await Lotcattle.findById(id)
                 const weightavg = (existe.weight / existe.quantity).toFixed(1)
-                await Lotcattle.findByIdAndUpdate(id, {weightavg});
+                await Lotcattle.findByIdAndUpdate(id, { weightavg });
             }
-            res.json({ 
+            res.json({
                 catllelot
             })
         } else {
-            if(errores.length!=0)
+            if (errores.length != 0)
                 res.json({
                     errores
                 })
             else
                 res.json({
-                    msg:"Inconsistencias en la información enviada!"
+                    msg: "Inconsistencias en la información enviada!"
                 })
         }
 
@@ -137,42 +137,57 @@ const cattleLotHttp = {
             cattleLot
         })
     },
-    cattleLotPutSubastar: async (req, res) => {        
-        const {id}=req.params
+    cattleLotPutSubastar: async (req, res) => {
+        const { id } = req.params
+        if (req.iniciado)
+            res.json({
+                msg: "Ok, Lote en subasta"
+            })
+        else {
+            const lotCattle = await Lotcattle
+                .findByIdAndUpdate(id,
+                    {
+                        state: 3,
+                        salestate: "En subasta",
+                        saletype: 1
+                    });
 
-        const lotCattle=await Lotcattle
-            .findByIdAndUpdate(id, 
-                { state: 3,
-                    salestate:"En subasta",
-                  saletype:1 });
-
-        res.json({
-            lotCattle
-        })
+            res.json({
+                lotCattle
+            })
+        }
     },
-    cattleLotPutRematar: async (req, res) => {        
-        const {id}=req.params
-        const lotCattle=await Lotcattle
-            .findByIdAndUpdate(id, 
-                { state: 3,
-                  salestate:"En remate",
-                  saletype:2 });
-        res.json({
-            lotCattle
-        })
+    cattleLotPutRematar: async (req, res) => {
+        const { id } = req.params
+        if (req.iniciado)
+            res.json({
+                msg: "Ok, Lote en remate"
+            })
+        else {
+            const lotCattle = await Lotcattle
+                .findByIdAndUpdate(id,
+                    {
+                        state: 3,
+                        salestate: "En remate",
+                        saletype: 2
+                    });
+            res.json({
+                lotCattle
+            })
+        }
     },
 
-    deleteAll: async (req, res) => {        
-        const lotCattle=await Lotcattle
+    deleteAll: async (req, res) => {
+        const lotCattle = await Lotcattle
             .deleteMany();
         res.json({
             lotCattle
         })
     },
 
-   
 
-    
+
+
 
 }
 
