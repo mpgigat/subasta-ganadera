@@ -20,11 +20,12 @@ const btnAdjudicar = document.querySelector('#btnAdjudicar');
 const btnDesierta = document.querySelector('#btnDesierta');
 const btnEnviarRemate = document.querySelector('#btnEnviarRemate');
 const btnreiniciar = document.querySelector('#btnreiniciar');
+const btneliminarultima = document.querySelector('#btneliminarultima');
 
 const btnPedirLotes = document.querySelector('#btnPedirLotes');
 
 let weight;
-
+let cantidad;
 const socket = io();
 
 socket.on('connect', () => {
@@ -157,6 +158,18 @@ btnreiniciar.addEventListener('click', () => {
     }
     
     socket.emit('reiniciarsubasta', subasta, (msg) => {
+        console.log(msg);
+    });
+});
+
+btneliminarultima.addEventListener('click', () => {
+    const idLotCattle = txtidlotcattle.value;
+
+    const subasta = {
+        idLotCattle
+    }
+    
+    socket.emit('elimineultima', subasta, (msg) => {
         console.log(msg);
     });
 });

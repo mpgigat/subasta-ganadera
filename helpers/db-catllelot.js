@@ -258,18 +258,20 @@ const helpersCattlelot = {
                     $pop: { bids: 1 }
                 },);
 
-        console.log("miguel",lotCattle);
-        
+        let precioEsperado=0;
+        if (lotCattle.saletype==1)
+            precioEsperado=lotCattle.bids.at(-1).pricekg
+        else
+            precioEsperado=lotCattle.bids.at(-1).totalprice
+            
+        const nuevo = {
+            idLotCattle:lotCattle._id,
+            precioEsperado
+        }
 
-        // const subasta = {
-        //     idLotCattle:lotCattle._id,
-        //     precioEsperado:lotCattle
-        // }
-
-        //const lotCattle = await helpersCattlelot.setPrecioEsperado(subasta)
+        await helpersCattlelot.setPrecioEsperado(nuevo)
 
         return await helpersCattlelot.buscarLoteSubastaActual()
-
     },
 
 
