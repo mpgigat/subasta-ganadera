@@ -232,11 +232,15 @@ const helpersCattlelot = {
     setDesierta: async (subasta) => {
         if (!subasta.idLotCattle) return
 
+
+        const actual = await Cattlelot.findById(subasta.idLotCattle);
+
         const existe = await Cattlelot
             .findByIdAndUpdate(subasta.idLotCattle,
                 {
                     state: 2,
-                    salestate: "Terminada Desierta"
+                    salestate: "Autosubasta",
+                    awarded: actual.provider
                 })
 
         const lotCattle = await Cattlelot

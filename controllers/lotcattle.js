@@ -80,8 +80,8 @@ const cattleLotHttp = {
         resto = tools.actualizarRestoNumeros("calfmale", resto.calfmale, resto)
         resto = tools.actualizarRestoNumeros("calffemale", resto.calffemale, resto)
         resto = tools.actualizarRestoNumeros("observations", resto.observations, resto)
-        resto = tools.actualizarRestoNumeros("asocebu", resto.asocebu, resto)
-        resto = tools.actualizarRestoNumeros("ganaderia", resto.ganaderia, resto)
+        // resto = tools.actualizarRestoNumeros("asocebu", resto.asocebu, resto)
+        // resto = tools.actualizarRestoNumeros("ganaderia", resto.ganaderia, resto)
         if (resto.breed != undefined) {
             if (tools.validarMongoId(resto.breed)) {
                 if (! await helpersBreed.existeBreedByIdFn(resto.breed)) {
