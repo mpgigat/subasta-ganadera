@@ -4,6 +4,8 @@ const cattleLotSchema=new mongoose.Schema({
     sale:{type:mongoose.Schema.Types.ObjectId,ref:'Sale',required:true},
     provider:{type:mongoose.Schema.Types.ObjectId,ref:'Holder',required:true},
     origin:{type:String, required:true},
+    asocebu:{type:String, required:true},
+    ganaderia:{type:String, required:true},
     lot:{type:Number,default:0},
     quantity:{type:Number,default:0},
     classcattle:{type:String,required:true},
