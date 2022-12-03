@@ -6,7 +6,7 @@ const cattleLotSchema=new mongoose.Schema({
     origin:{type:String, required:true},
     asocebu:{type:String, },
     ganaderia:{type:String, },
-    lot:{type:Number,default:0},
+    lot:{type:Number,default:0},  
     quantity:{type:Number,default:0},
     classcattle:{type:String,required:true},
     weight:{type:Number,default:0},
