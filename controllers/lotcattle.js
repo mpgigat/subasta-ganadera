@@ -72,7 +72,7 @@ const cattleLotHttp = {
                 errores.push("Id de Proveedor no existe")
                 delete resto["provider"];
             }
-        }
+        }   
         resto = tools.actualizarResto("origin", resto.origin, resto)
         resto = tools.actualizarRestoNumeros("quantity", resto.quantity, resto)
         resto = tools.actualizarResto("classcattle", resto.classcattle, resto)
