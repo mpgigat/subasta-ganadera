@@ -240,7 +240,10 @@ const helpersCattlelot = {
                 {
                     state: 2,
                     salestate: "Autosubasta",
-                    awarded: actual.provider
+                    awarded: actual.provider,
+                    totalprice: actual.totalpricetemp,
+                pricekg: actual.pricekgtemp,
+                valueperanimal: actual.valueperanimaltemp,
                 })
 
         const lotCattle = await Cattlelot
